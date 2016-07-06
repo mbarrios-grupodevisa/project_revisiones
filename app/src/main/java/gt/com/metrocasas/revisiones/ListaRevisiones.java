@@ -21,7 +21,7 @@ public class ListaRevisiones extends Fragment {
     private List<ItemRevision> listRevision = new ArrayList<>();
     private RecyclerView recyclerView;
     private RevisionAdapter rAdapter;
-
+    private String proyecto;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -35,82 +35,8 @@ public class ListaRevisiones extends Fragment {
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(rAdapter);
-        prepareMovieData();
-
+        proyecto = "Viventi";
+        new retornarRevisiones(getActivity(), rAdapter, listRevision).execute(proyecto);
         return partenView;
-    }
-
-    private void prepareMovieData() {
-
-        ItemRevision item = new ItemRevision("REVISIÓN 01/01/16");
-        listRevision.add(item);
-
-        item = new ItemRevision("REVISIÓN 01/01/16");
-        listRevision.add(item);
-
-        item = new ItemRevision("REVISIÓN 01/02/16");
-        listRevision.add(item);
-
-        item = new ItemRevision("REVISIÓN 01/03/16");
-        listRevision.add(item);
-
-        item = new ItemRevision("REVISIÓN 01/04/16");
-        listRevision.add(item);
-
-        item = new ItemRevision("REVISIÓN 01/05/16");
-        listRevision.add(item);
-
-        item = new ItemRevision("REVISIÓN 01/06/16");
-        listRevision.add(item);
-
-        item = new ItemRevision("REVISIÓN 01/08/16");
-        listRevision.add(item);
-
-        item = new ItemRevision("REVISIÓN 01/09/16");
-        listRevision.add(item);
-
-        item = new ItemRevision("REVISIÓN 01/10/16");
-        listRevision.add(item);
-
-        item = new ItemRevision("REVISIÓN 01/11/16");
-        listRevision.add(item);
-
-        item = new ItemRevision("REVISIÓN 01/12/16");
-        listRevision.add(item);
-
-        item = new ItemRevision("REVISIÓN 01/01/16");
-        listRevision.add(item);
-
-        item = new ItemRevision("REVISIÓN 01/02/16");
-        listRevision.add(item);
-
-        item = new ItemRevision("REVISIÓN 01/03/16");
-        listRevision.add(item);
-
-        item = new ItemRevision("REVISIÓN 01/04/16");
-        listRevision.add(item);
-
-        item = new ItemRevision("REVISIÓN 01/05/16");
-        listRevision.add(item);
-
-        item = new ItemRevision("REVISIÓN 01/06/16");
-        listRevision.add(item);
-
-        item = new ItemRevision("REVISIÓN 01/08/16");
-        listRevision.add(item);
-
-        item = new ItemRevision("REVISIÓN 01/09/16");
-        listRevision.add(item);
-
-        item = new ItemRevision("REVISIÓN 01/10/16");
-        listRevision.add(item);
-
-        item = new ItemRevision("REVISIÓN 01/11/16");
-        listRevision.add(item);
-
-        item = new ItemRevision("REVISIÓN 01/12/16");
-        listRevision.add(item);
-
-        rAdapter.notifyDataSetChanged();
     }
 }

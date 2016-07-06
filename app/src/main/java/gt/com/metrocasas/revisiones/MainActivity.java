@@ -84,8 +84,11 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.viventi) {
-            Toast.makeText(this,"Viventi",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this,"Viventi",Toast.LENGTH_SHORT).show();
             Fragment fragment = new ListaRevisiones();
+            Bundle args = new Bundle();
+            args.putString("proyecto","Viventi");
+            fragment.setArguments(args);
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction()
                     .replace(R.id.content_frame, fragment)
