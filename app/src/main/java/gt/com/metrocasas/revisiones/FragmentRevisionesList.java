@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by Usuario on 05/07/2016.
  */
-public class ListaRevisiones extends Fragment {
+public class FragmentRevisionesList extends Fragment {
 
     private List<ItemRevision> listRevision = new ArrayList<>();
     private RecyclerView recyclerView;
@@ -35,7 +35,7 @@ public class ListaRevisiones extends Fragment {
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(rAdapter);
-        proyecto = "Viventi";
+        proyecto = getArguments().getString("proyecto");
         new retornarRevisiones(getActivity(), rAdapter, listRevision).execute(proyecto);
         return partenView;
     }

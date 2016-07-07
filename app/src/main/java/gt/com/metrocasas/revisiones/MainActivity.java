@@ -84,18 +84,23 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.viventi) {
-            //Toast.makeText(this,"Viventi",Toast.LENGTH_SHORT).show();
-            Fragment fragment = new ListaRevisiones();
+            Fragment fragment = new FragmentRevisionesList();
             Bundle args = new Bundle();
-            args.putString("proyecto","Viventi");
+            args.putString("proyecto", "Viventi");
             fragment.setArguments(args);
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction()
                     .replace(R.id.content_frame, fragment)
                     .commit();
-            // Handle the camera action
         } else if (id == R.id.casa_asuncion) {
-            Toast.makeText(this,"Casa Asunción",Toast.LENGTH_SHORT).show();
+            Fragment fragment = new FragmentRevisionesList();
+            Bundle args = new Bundle();
+            args.putString("proyecto", "Casa Asuncion");
+            fragment.setArguments(args);
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame, fragment)
+                    .commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
