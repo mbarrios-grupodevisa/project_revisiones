@@ -84,7 +84,6 @@ public class IngresoElemento extends AsyncTask<String, Integer, String> {
 
                     }
                 }).show();
-        //Toast.makeText(this.context, "¡Datos Cargados Exitosamente!", Toast.LENGTH_LONG).show();
         p.setVisibility(View.GONE);
         q.setVisibility(View.VISIBLE);
     }
