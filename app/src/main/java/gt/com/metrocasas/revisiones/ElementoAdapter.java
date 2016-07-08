@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,7 +38,18 @@ public class ElementoAdapter extends RecyclerView.Adapter<ElementoAdapter.MyView
             agregar_comentario.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(null,"Agregar Comentario",Toast.LENGTH_LONG).show();
+                    Toast.makeText(view.getContext(),"Agregar Comentario",Toast.LENGTH_LONG).show();
+                }
+            });
+
+            estado.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                    if(isChecked){
+                        agregar_comentario.setEnabled(false);
+                    }else{
+                        agregar_comentario.setEnabled(true);
+                    }
                 }
             });
         }
@@ -59,4 +71,5 @@ public class ElementoAdapter extends RecyclerView.Adapter<ElementoAdapter.MyView
     public int getItemCount() {
         return listElemento.size();
     }
+
 }

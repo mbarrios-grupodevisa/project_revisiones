@@ -1,8 +1,10 @@
 package gt.com.metrocasas.revisiones;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,9 +28,22 @@ public class FragmentRevisionesList extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View partenView = inflater.inflate(R.layout.lista_revisiones, container, false);
+        final View partenView = inflater.inflate(R.layout.lista_revisiones, container, false);
 
         recyclerView = (RecyclerView) partenView.findViewById(R.id.recycler_view);
+        FloatingActionButton fab = (FloatingActionButton) partenView.findViewById(R.id.btn_nuevo);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(partenView.getContext(), DetalleRevisionActivity.class);
+                intent.putExtra("proyecto",proyecto);
+                startActivity(intent);
+
+                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                //      .setAction("Action", null).show();
+            }
+        });
 
         rAdapter = new RevisionAdapter(listRevision);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());

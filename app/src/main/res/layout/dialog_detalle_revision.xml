@@ -7,8 +7,27 @@
     android:layout_margin="0dp"
     android:orientation="vertical">
 
-    <include layout="@layout/card_cenac_externo"></include>
-    <include layout="@layout/card_cenac_interno"></include>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include layout="@layout/card_cenac_interno"></include>
+            <include layout="@layout/card_cenac_externo"></include>
+            <include layout="@layout/card_despensa"></include>
+            <include layout="@layout/card_limpieza"></include>
+            <include layout="@layout/card_construccion"></include>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
 
 
 
