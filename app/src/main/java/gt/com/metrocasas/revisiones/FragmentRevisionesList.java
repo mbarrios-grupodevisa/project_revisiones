@@ -36,7 +36,7 @@ public class FragmentRevisionesList extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(rAdapter);
         proyecto = getArguments().getString("proyecto");
-        new retornarRevisiones(getActivity(), rAdapter, listRevision).execute(proyecto);
+        new RetornarRevisiones(getActivity(), rAdapter, listRevision).execute(proyecto);
         return partenView;
     }
 }
