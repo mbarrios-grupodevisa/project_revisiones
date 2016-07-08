@@ -1,17 +1,14 @@
 package gt.com.metrocasas.revisiones;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.design.widget.Snackbar;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.ScrollView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -22,13 +19,14 @@ import java.util.List;
 
 public class IngresoRevision extends AsyncTask<String, Integer, String> {
 
+    View v;
     Context context;
     String revisionid;
-    List<Revision> listRevision;
+    List<Elemento> listElemento;
 
-    public IngresoRevision(Context context, List<Revision> listRevision) {
+    public IngresoRevision(Context context, List<Elemento> listElemento) {
         this.context = context;
-        this.listRevision = listRevision;
+        this.listElemento = listElemento;
     }
 
     @Override
@@ -64,9 +62,13 @@ public class IngresoRevision extends AsyncTask<String, Integer, String> {
                 JSONObject objecto = jsonArray.getJSONObject(0);
                 revisionid = objecto.getString("id");
             }
-            for (Revision i:listRevision) {
-                link = "http://atreveteacrecer.metrocasas.com.gt/insertModels.php";
-                data = URLEncoder.encode("projectid", "UTF-8") + "=" + URLEncoder.encode(revisionid, "UTF-8");
+            for (Elemento i:listElemento) {
+                link = "http://atreveteacrecer.metrocasas.com.gt/insertDetalleRevision.php";
+                data = URLEncoder.encode("revision_id", "UTF-8") + "=" + URLEncoder.encode(revisionid, "UTF-8")
+                        + "&" + URLEncoder.encode("elemento_id", "UTF-8") + "=" + URLEncoder.encode(i.getId(), "UTF-8")
+                        + "&" + URLEncoder.encode("estado", "UTF-8") + "=" + URLEncoder.encode(Integer.toString(i.isEstado()), "UTF-8")
+                        + "&" + URLEncoder.encode("imagen", "UTF-8") + "=" + URLEncoder.encode(i.getImagen(), "UTF-8")
+                        + "&" + URLEncoder.encode("comentario", "UTF-8") + "=" + URLEncoder.encode(i.getComentario(), "UTF-8") ;
 
                 url = new URL(link);
                 conn = url.openConnection();
@@ -84,7 +86,7 @@ public class IngresoRevision extends AsyncTask<String, Integer, String> {
                 }
 
             }
-            //listRevision.clear();
+            listElemento.clear();
             return "success";
         }
         catch(Exception e)  {
@@ -103,7 +105,22 @@ public class IngresoRevision extends AsyncTask<String, Integer, String> {
 
     @Override
     protected void onPostExecute(String result) {
-
+        if(result.equals("success")) {
+            Snackbar.make(v, "¡Datos ingresados exitosamente!", Snackbar.LENGTH_INDEFINITE)
+                    .setAction("Aceptar", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                        }
+                    }).show();
+        } else {
+            Snackbar.make(v, "Ocurrió un error al cargar los datos", Snackbar.LENGTH_INDEFINITE)
+                    .setActionTextColor(Color.RED)
+                    .setAction("Aceptar", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                        }
+                    }).show();
+        }
     }
 
 }

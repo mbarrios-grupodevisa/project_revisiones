@@ -10,7 +10,8 @@ public class Elemento {
     private String comentario;
     private String imagen;
 
-    public Elemento(String proyecto, String clasficacion, String elemento) {
+    public Elemento(String id, String proyecto, String clasficacion, String elemento) {
+        this.id = id;
         this.proyecto = proyecto;
         this.clasficacion = clasficacion;
         this.elemento = elemento;
@@ -48,8 +49,8 @@ public class Elemento {
         this.id = id;
     }
 
-    public boolean isEstado() {
-        return estado;
+    public int isEstado() { if(estado) return 1;
+        return 0;
     }
 
     public void setEstado(boolean estado) {
