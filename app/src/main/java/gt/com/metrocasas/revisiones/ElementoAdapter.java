@@ -72,4 +72,7 @@ public class ElementoAdapter extends RecyclerView.Adapter<ElementoAdapter.MyView
         return listElemento.size();
     }
 
+    public List<Elemento> getListElemento() {
+        return listElemento;
+    }
 }

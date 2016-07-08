@@ -78,7 +78,8 @@ public class DetalleRevisionActivity extends AppCompatActivity implements View.O
         recyclerViewConstruccion.setItemAnimator(new DefaultItemAnimator());
         recyclerViewConstruccion.setAdapter(aAdapterConstruccion);
 
-        testValues();
+        new GetElementos(this,aAdapterCI,aAdapterCE,aAdapterDespensa,aAdapterLimpieza,aAdapterConstruccion).execute("Viventi");
+
     }
 
     @Override

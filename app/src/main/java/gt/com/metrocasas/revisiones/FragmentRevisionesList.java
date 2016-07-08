@@ -3,7 +3,6 @@ package gt.com.metrocasas.revisiones;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -51,7 +50,8 @@ public class FragmentRevisionesList extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(rAdapter);
         proyecto = getArguments().getString("proyecto");
-        new RetornarRevisiones(getActivity(), rAdapter, listRevision).execute(proyecto);
+        new GetRevisiones(getActivity(),rAdapter,listRevision).execute(proyecto);
+        //new RetornarRevisiones(getActivity(), rAdapter, listRevision).execute(proyecto);
         return partenView;
     }
 }

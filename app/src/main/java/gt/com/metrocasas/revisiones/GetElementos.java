@@ -15,7 +15,7 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.List;
 
-public class RetornarElementos extends AsyncTask<String, Integer, String> {
+public class GetElementos extends AsyncTask<String, Integer, String> {
 
     Context context;
     List<Elemento> listInternos;
@@ -30,13 +30,18 @@ public class RetornarElementos extends AsyncTask<String, Integer, String> {
     ElementoAdapter cAdapter;
     ProgressBar progressBar;
 
-    public RetornarElementos(Context context, ElementoAdapter iAdapter, ElementoAdapter eAdapter, ElementoAdapter dAdapter, ElementoAdapter lAdapter, ElementoAdapter cAdapter) {
+    public GetElementos(Context context, ElementoAdapter iAdapter, ElementoAdapter eAdapter, ElementoAdapter dAdapter, ElementoAdapter lAdapter, ElementoAdapter cAdapter) {
         this.context = context;
         this.iAdapter = iAdapter;
         this.eAdapter = eAdapter;
         this.dAdapter = dAdapter;
         this.lAdapter = lAdapter;
         this.cAdapter = cAdapter;
+        this.listInternos = iAdapter.getListElemento();
+        this.listExternos = eAdapter.getListElemento();
+        this.listDespensa = dAdapter.getListElemento();
+        this.listLimpieza = lAdapter.getListElemento();
+        this.listConstruccion = cAdapter.getListElemento();
     }
 
     @Override

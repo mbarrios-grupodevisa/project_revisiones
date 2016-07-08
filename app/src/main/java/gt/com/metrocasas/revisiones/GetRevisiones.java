@@ -18,7 +18,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RetornarRevisiones extends AsyncTask<String, Integer, String> {
+public class GetRevisiones extends AsyncTask<String, Integer, String> {
 
     View v;
     Context context;
@@ -27,7 +27,7 @@ public class RetornarRevisiones extends AsyncTask<String, Integer, String> {
     private RevisionAdapter rAdapter;
     private List<ItemRevision> listRevision = new ArrayList<>();
 
-    public RetornarRevisiones(Context context, RevisionAdapter rAdapter, List<ItemRevision> listRevision) {
+    public GetRevisiones(Context context, RevisionAdapter rAdapter, List<ItemRevision> listRevision) {
         this.context = context;
         this.rAdapter = rAdapter;
         this.listRevision = listRevision;
