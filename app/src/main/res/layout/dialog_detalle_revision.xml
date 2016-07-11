@@ -22,6 +22,13 @@
             <include layout="@layout/card_limpieza"></include>
             <include layout="@layout/card_construccion"></include>
 
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Enviar Datos"
+                android:id="@+id/btn_enviar_datos"
+                style="@style/Widget.AppCompat.Button.Colored"/>
+
         </LinearLayout>
 
 

@@ -106,4 +106,6 @@ public class ElementoAdapter extends RecyclerView.Adapter<ElementoAdapter.MyView
         return listElemento;
     }
 
+
+
 }

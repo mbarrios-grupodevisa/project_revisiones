@@ -49,6 +49,10 @@ public class MainActivity extends AppCompatActivity
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
+        setFragment(1);
+
+
     }
 
     @Override
@@ -157,5 +161,28 @@ public class MainActivity extends AppCompatActivity
     private void start_second_activity(){
         Intent intent = new Intent(this, DetalleRevisionActivity.class);
         startActivity(intent);
+    }
+
+    private void setFragment(int id)
+    {
+        if (id == 1) {
+            Fragment fragment = new FragmentRevisionesList();
+            Bundle args = new Bundle();
+            args.putString("proyecto", "Viventi");
+            fragment.setArguments(args);
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame, fragment)
+                    .commit();
+        } else if (id == 2) {
+            Fragment fragment = new FragmentRevisionesList();
+            Bundle args = new Bundle();
+            args.putString("proyecto", "Casa Asuncion");
+            fragment.setArguments(args);
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame, fragment)
+                    .commit();
+        }
     }
 }

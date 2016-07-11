@@ -2,6 +2,7 @@ package gt.com.metrocasas.revisiones;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.support.v7.widget.CardView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import org.json.JSONArray;
@@ -121,5 +122,9 @@ public class GetElementos extends AsyncTask<String, Integer, String> {
         dAdapter.notifyDataSetChanged();
         lAdapter.notifyDataSetChanged();
         cAdapter.notifyDataSetChanged();
+        if(listConstruccion.isEmpty())
+        {
+//            CardView construccion = (CardView) this.context.findViewById(R.id.recycler_view_ci);
+        }
     }
 }

@@ -6,6 +6,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +38,8 @@ public class DetalleRevisionActivity extends AppCompatActivity implements View.O
 
     private String proyecto;
 
+    private Button enviar_datos;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +50,15 @@ public class DetalleRevisionActivity extends AppCompatActivity implements View.O
         recyclerViewDespensa = (RecyclerView) findViewById(R.id.recycler_view_despensa);
         recyclerViewLimpieza = (RecyclerView) findViewById(R.id.recycler_view_limpieza);
         recyclerViewConstruccion = (RecyclerView) findViewById(R.id.recycler_view_construccion);
+        enviar_datos = (Button) findViewById(R.id.btn_enviar_datos);
+
+        enviar_datos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Envio de Datos
+                getListElements();
+            }
+        });
 
         aAdapterCI = new ElementoAdapter(listItemCI,this);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
@@ -93,5 +105,16 @@ public class DetalleRevisionActivity extends AppCompatActivity implements View.O
 
     @Override
     public void onNegativeButtonClick() {
+    }
+
+    public List<Elemento> getListElements()
+    {
+        List<Elemento> list = new ArrayList<>();
+        list.addAll(listItemCI);
+        list.addAll(listItemCE);
+        list.addAll(listItemLimpieza);
+        list.addAll(listItemDespensa);
+        list.addAll(listItemCostrucion);
+        return list;
     }
 }
