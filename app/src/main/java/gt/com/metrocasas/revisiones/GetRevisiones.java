@@ -2,13 +2,9 @@ package gt.com.metrocasas.revisiones;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
-
+import android.widget.Toast;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -20,10 +16,8 @@ import java.util.List;
 
 public class GetRevisiones extends AsyncTask<String, Integer, String> {
 
-    View v;
     Context context;
-    private String json;
-    public static String ERROR = "Error en los datos, revise";
+    public static String ERROR = "No se encontraron revisiones";
     private RevisionAdapter rAdapter;
     private List<ItemRevision> listRevision = new ArrayList<>();
 
@@ -52,7 +46,7 @@ public class GetRevisiones extends AsyncTask<String, Integer, String> {
             BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 
             StringBuilder sb = new StringBuilder();
-            String line = null;
+            String line;
 
             // Read Server Response
             while ((line = reader.readLine()) != null) {
@@ -87,12 +81,11 @@ public class GetRevisiones extends AsyncTask<String, Integer, String> {
                     ItemRevision item = new ItemRevision(fecha);
                     listRevision.add(item);
                 }
-                rAdapter.notifyDataSetChanged();
+
             }
         } catch (Exception e) {
-            ItemRevision item = new ItemRevision("ERROR");
-            listRevision.add(item);
-            rAdapter.notifyDataSetChanged();
+            Toast.makeText(this.context, ERROR, Toast.LENGTH_LONG).show();
         }
+        rAdapter.notifyDataSetChanged();
     }
 }

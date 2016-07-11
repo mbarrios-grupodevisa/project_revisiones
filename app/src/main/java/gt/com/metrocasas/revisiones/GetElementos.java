@@ -3,10 +3,9 @@ package gt.com.metrocasas.revisiones;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.ProgressBar;
-
+import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -28,6 +27,7 @@ public class GetElementos extends AsyncTask<String, Integer, String> {
     ElementoAdapter dAdapter;
     ElementoAdapter lAdapter;
     ElementoAdapter cAdapter;
+    public static String ERROR = "No se encontraron elementos de este proyecto";
     ProgressBar progressBar;
 
     public GetElementos(Context context, ElementoAdapter iAdapter, ElementoAdapter eAdapter, ElementoAdapter dAdapter, ElementoAdapter lAdapter, ElementoAdapter cAdapter) {
@@ -64,7 +64,7 @@ public class GetElementos extends AsyncTask<String, Integer, String> {
             BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 
             StringBuilder sb = new StringBuilder();
-            String line = null;
+            String line;
 
             // Read Server Response
             while ((line = reader.readLine()) != null) {
@@ -96,30 +96,30 @@ public class GetElementos extends AsyncTask<String, Integer, String> {
                 {
                     JSONObject objecto = jsonArray.getJSONObject(i);
                     if(objecto.getString("clasificacion").equals("Interno")) {
-                        Elemento item = new Elemento(objecto.getString("proyecto"), objecto.getString("clasificacion"), objecto.getString("elemento"));
+                        Elemento item = new Elemento(objecto.getString("id"), objecto.getString("proyecto"), objecto.getString("clasificacion"), objecto.getString("elemento"));
                         listInternos.add(item);
                     } else if(objecto.getString("clasificacion").equals("Externo")) {
-                        Elemento item = new Elemento(objecto.getString("proyecto"), objecto.getString("clasificacion"), objecto.getString("elemento"));
+                        Elemento item = new Elemento(objecto.getString("id"), objecto.getString("proyecto"), objecto.getString("clasificacion"), objecto.getString("elemento"));
                         listExternos.add(item);
                     } else if(objecto.getString("clasificacion").equals("Despensa")) {
-                        Elemento item = new Elemento(objecto.getString("proyecto"), objecto.getString("clasificacion"), objecto.getString("elemento"));
+                        Elemento item = new Elemento(objecto.getString("id"), objecto.getString("proyecto"), objecto.getString("clasificacion"), objecto.getString("elemento"));
                         listDespensa.add(item);
                     } else if(objecto.getString("clasificacion").equals("Limpieza")) {
-                        Elemento item = new Elemento(objecto.getString("proyecto"), objecto.getString("clasificacion"), objecto.getString("elemento"));
+                        Elemento item = new Elemento(objecto.getString("id"), objecto.getString("proyecto"), objecto.getString("clasificacion"), objecto.getString("elemento"));
                         listLimpieza.add(item);
                     } else if(objecto.getString("clasificacion").equals("Construccion")) {
-                        Elemento item = new Elemento(objecto.getString("proyecto"), objecto.getString("clasificacion"), objecto.getString("elemento"));
+                        Elemento item = new Elemento(objecto.getString("id"), objecto.getString("proyecto"), objecto.getString("clasificacion"), objecto.getString("elemento"));
                         listConstruccion.add(item);
                     }
                 }
-                iAdapter.notifyDataSetChanged();
-                eAdapter.notifyDataSetChanged();
-                dAdapter.notifyDataSetChanged();
-                lAdapter.notifyDataSetChanged();
-                cAdapter.notifyDataSetChanged();
             }
         } catch (Exception e) {
-
+            Toast.makeText(this.context, ERROR, Toast.LENGTH_LONG).show();
         }
+        iAdapter.notifyDataSetChanged();
+        eAdapter.notifyDataSetChanged();
+        dAdapter.notifyDataSetChanged();
+        lAdapter.notifyDataSetChanged();
+        cAdapter.notifyDataSetChanged();
     }
 }
