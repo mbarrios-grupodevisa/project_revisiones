@@ -2,14 +2,14 @@ package gt.com.metrocasas.revisiones;
 
 public class Elemento {
 
-    private String id;
-    private String proyecto;
-    private String clasficacion;
-    private String elemento;
-    private boolean estado;
-    private String comentario;
-    private String imagen;
-    private String imagePath;
+    private String id = "";
+    private String proyecto = "";
+    private String clasficacion = "";
+    private String elemento = "";
+    private boolean estado = false;
+    private String comentario = "";
+    private String imagen = "";
+    private String imagePath = "";
 
     public String getImagePath() {
         return imagePath;

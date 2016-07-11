@@ -5,15 +5,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Layout;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-/**
- * Created by Usuario on 07/07/2016.
- */
 public class DetalleRevisionActivity extends AppCompatActivity implements View.OnClickListener, OnSimpleDialogListener{
 
     private List<Elemento> listItemCE = new ArrayList<>();
@@ -37,13 +38,17 @@ public class DetalleRevisionActivity extends AppCompatActivity implements View.O
     private ElementoAdapter aAdapterConstruccion;
 
     private String proyecto;
-
+    private View v;
     private Button enviar_datos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_detalle_revision);
+
+        v = findViewById(R.id.detalle);
+        proyecto = getIntent().getExtras().getString("proyecto");
+        final String fechaRevision = new SimpleDateFormat("dd/MMMM/yyyy - HH:mm:ss").format(new Date());
 
         recyclerViewCenacInterno = (RecyclerView) findViewById(R.id.recycler_view_ci);
         recyclerViewCenacExterno = (RecyclerView) findViewById(R.id.recycler_view_ce);
@@ -56,7 +61,7 @@ public class DetalleRevisionActivity extends AppCompatActivity implements View.O
             @Override
             public void onClick(View view) {
                 //Envio de Datos
-                getListElements();
+                new IngresoRevision(getApplicationContext(), getListElements(), v).execute("1",proyecto, fechaRevision);
             }
         });
 
