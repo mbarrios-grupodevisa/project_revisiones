@@ -22,7 +22,9 @@ import java.util.List;
 public class FragmentRevisionesList extends Fragment {
 
     private static final int ACTIVITY_REQUEST = 1;
-    private static final int RESULT_OK = 1;
+    private static final int RESULT_OK = 2;
+    private static final int VIVENTI = 3;
+    private static final int CASA_ASUNCION = 4;
     private SwipeRefreshLayout swipeContainer;
     private List<ItemRevision> listRevision = new ArrayList<>();
     private RecyclerView recyclerView;
@@ -82,9 +84,17 @@ public class FragmentRevisionesList extends Fragment {
 
         if(requestCode == ACTIVITY_REQUEST)
         {
-            if(resultCode == RESULT_OK)
+            if(resultCode == VIVENTI)
             {
-                Toast.makeText(getActivity(),"Enrique" ,Toast.LENGTH_LONG).show();
+                listRevision.clear();
+                rAdapter.notifyDataSetChanged();
+                new GetRevisiones(getActivity(),rAdapter,listRevision,swipeContainer).execute(proyecto);
+            }
+            if(resultCode == CASA_ASUNCION)
+            {
+                listRevision.clear();
+                rAdapter.notifyDataSetChanged();
+                new GetRevisiones(getActivity(),rAdapter,listRevision,swipeContainer).execute(proyecto);
             }
         }
     }

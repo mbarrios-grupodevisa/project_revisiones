@@ -48,6 +48,9 @@ public class DetalleRevisionActivity extends AppCompatActivity implements View.O
     private View v;
     private Button enviar_datos;
 
+    private static final int VIVENTI = 3;
+    private static final int CASA_ASUNCION = 4;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +74,12 @@ public class DetalleRevisionActivity extends AppCompatActivity implements View.O
                 //Envio de Datos
                 new IngresoRevision(getApplicationContext(), getListElements(), v).execute(user, proyecto, fechaRevision);
                 getListElements();
+
+                Intent databack = new Intent();
+                databack.putExtra("fecha",fechaRevision);
+                if(proyecto.equals("Viventi")) setResult(VIVENTI,databack);
+                if(proyecto.equals("Casa Asuncion")) setResult(CASA_ASUNCION,databack);
+
                 finish();
             }
         });
