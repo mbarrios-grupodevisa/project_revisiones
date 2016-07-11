@@ -1,5 +1,6 @@
 package gt.com.metrocasas.revisiones;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -8,6 +9,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,7 +36,7 @@ public class DetalleRevisionActivity extends AppCompatActivity implements View.O
     private List<Elemento> listItemCostrucion = new ArrayList<>();
     private RecyclerView recyclerViewConstruccion;
 
-    private String proyecto, user, fechaRevision;
+    private String proyecto, user, fechaRevision, json;
     private View v;
 
     private static final int VIVENTI = 3;
@@ -56,10 +62,10 @@ public class DetalleRevisionActivity extends AppCompatActivity implements View.O
         enviar_datos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Envio de Datos
-                new IngresoRevision(getApplicationContext(), getListElements(), v).execute(user, proyecto, fechaRevision);
-                getListElements();
-
+                json = getJSON(getListElements());
+                new IngresoRevision(getApplicationContext(), v).execute(user, proyecto, fechaRevision, json);
+                //getListElements();
+                //finish();
                 Intent databack = new Intent();
                 databack.putExtra("fecha",fechaRevision);
                 if(proyecto.equals("Viventi")) setResult(VIVENTI,databack);
@@ -195,5 +201,24 @@ public class DetalleRevisionActivity extends AppCompatActivity implements View.O
         list.addAll(listItemLimpieza);
         list.addAll(listItemCostrucion);
         return list;
+    }
+
+    public String getJSON(List<Elemento> lista) {
+        JSONArray jsonArray = new JSONArray();
+        try {
+            for (Elemento i:lista) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("elemento_id", i.getId());
+                jsonObject.put("estado", i.isEstado());
+                jsonObject.put("imagen", i.getImagen());
+                jsonObject.put("comentario", i.getImagen());
+                jsonArray.put(jsonObject);
+            }
+            JSONObject studentsObj = new JSONObject();
+            studentsObj.put("detalles", jsonArray);
+            return studentsObj.toString();
+        } catch (Exception e) {
+            return "null";
+        }
     }
 }
