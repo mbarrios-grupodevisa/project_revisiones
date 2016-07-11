@@ -8,11 +8,15 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Layout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -40,14 +44,19 @@ public class DetalleRevisionActivity extends AppCompatActivity implements View.O
     private RecyclerView recyclerViewConstruccion;
     private ElementoAdapter aAdapterConstruccion;
 
-    private String proyecto;
-
+    private String proyecto, user, fechaRevision;
+    private View v;
     private Button enviar_datos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_detalle_revision);
+
+        v = findViewById(R.id.detalle);
+        proyecto = getIntent().getExtras().getString("proyecto");
+        user = getIntent().getExtras().getString("id");
+        fechaRevision = new SimpleDateFormat("dd/MMMM/yyyy - HH:mm:ss").format(new Date());
 
         recyclerViewCenacInterno = (RecyclerView) findViewById(R.id.recycler_view_ci);
         recyclerViewCenacExterno = (RecyclerView) findViewById(R.id.recycler_view_ce);
@@ -60,6 +69,7 @@ public class DetalleRevisionActivity extends AppCompatActivity implements View.O
             @Override
             public void onClick(View view) {
                 //Envio de Datos
+                new IngresoRevision(getApplicationContext(), getListElements(), v).execute(user, proyecto, fechaRevision);
                 getListElements();
                 finish();
             }
@@ -166,7 +176,7 @@ public class DetalleRevisionActivity extends AppCompatActivity implements View.O
         recyclerViewConstruccion.setItemAnimator(new DefaultItemAnimator());
         recyclerViewConstruccion.setAdapter(aAdapterConstruccion);
 
-        new GetElementos(this,aAdapterCI,aAdapterCE,aAdapterDespensa,aAdapterLimpieza,aAdapterConstruccion).execute("Viventi");
+        new GetElementos(this,aAdapterCI,aAdapterCE,aAdapterDespensa,aAdapterLimpieza,aAdapterConstruccion).execute(proyecto);
 
     }
 

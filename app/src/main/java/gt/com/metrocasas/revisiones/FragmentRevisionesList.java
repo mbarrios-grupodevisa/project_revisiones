@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,15 +23,30 @@ public class FragmentRevisionesList extends Fragment {
 
     private static final int ACTIVITY_REQUEST = 1;
     private static final int RESULT_OK = 1;
+    private SwipeRefreshLayout swipeContainer;
     private List<ItemRevision> listRevision = new ArrayList<>();
     private RecyclerView recyclerView;
     private RevisionAdapter rAdapter;
-    private String proyecto;
+    private String proyecto, userid;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         final View partenView = inflater.inflate(R.layout.lista_revisiones, container, false);
+        userid = getArguments().getString("id");
+        swipeContainer = (SwipeRefreshLayout)partenView.findViewById(R.id.swipeContainer);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                listRevision.clear();
+                rAdapter.notifyDataSetChanged();
+                new GetRevisiones(getActivity(),rAdapter,listRevision,swipeContainer).execute(proyecto);
+            }
+        });
+        swipeContainer.setColorSchemeResources(android.R.color.holo_green_light,
+                android.R.color.holo_blue_bright,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
 
         recyclerView = (RecyclerView) partenView.findViewById(R.id.recycler_view);
         FloatingActionButton fab = (FloatingActionButton) partenView.findViewById(R.id.btn_nuevo);
@@ -40,6 +56,7 @@ public class FragmentRevisionesList extends Fragment {
 
                 Intent intent = new Intent(partenView.getContext(), DetalleRevisionActivity.class);
                 intent.putExtra("proyecto",proyecto);
+                intent.putExtra("id", userid);
                 startActivityForResult(intent,ACTIVITY_REQUEST);
                 //startActivity(intent);
 
@@ -54,7 +71,7 @@ public class FragmentRevisionesList extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(rAdapter);
         proyecto = getArguments().getString("proyecto");
-        new GetRevisiones(getActivity(),rAdapter,listRevision).execute(proyecto);
+        new GetRevisiones(getActivity(),rAdapter,listRevision,swipeContainer).execute(proyecto);
         //new RetornarRevisiones(getActivity(), rAdapter, listRevision).execute(proyecto);
         return partenView;
     }

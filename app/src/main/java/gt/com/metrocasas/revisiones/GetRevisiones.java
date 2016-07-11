@@ -2,6 +2,7 @@ package gt.com.metrocasas.revisiones;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -17,14 +18,16 @@ import java.util.List;
 public class GetRevisiones extends AsyncTask<String, Integer, String> {
 
     Context context;
+    private SwipeRefreshLayout swipeContainer;
     public static String ERROR = "No se encontraron revisiones";
     private RevisionAdapter rAdapter;
     private List<ItemRevision> listRevision = new ArrayList<>();
 
-    public GetRevisiones(Context context, RevisionAdapter rAdapter, List<ItemRevision> listRevision) {
+    public GetRevisiones(Context context, RevisionAdapter rAdapter, List<ItemRevision> listRevision, SwipeRefreshLayout swipeContainer) {
         this.context = context;
         this.rAdapter = rAdapter;
         this.listRevision = listRevision;
+        this.swipeContainer = swipeContainer;
     }
     @Override
     protected String doInBackground(String... params) {
@@ -86,6 +89,7 @@ public class GetRevisiones extends AsyncTask<String, Integer, String> {
         } catch (Exception e) {
             Toast.makeText(this.context, ERROR, Toast.LENGTH_LONG).show();
         }
+        swipeContainer.setRefreshing(false);
         rAdapter.notifyDataSetChanged();
     }
 }

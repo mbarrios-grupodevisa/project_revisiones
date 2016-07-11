@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -24,21 +26,24 @@ public class IngresoRevision extends AsyncTask<String, Integer, String> {
     String revisionid;
     List<Elemento> listElemento;
 
-    public IngresoRevision(Context context, List<Elemento> listElemento) {
+    public IngresoRevision(Context context, List<Elemento> listElemento, View v) {
         this.context = context;
         this.listElemento = listElemento;
+        this.v = v;
     }
 
     @Override
     protected String doInBackground(String... params) {
         try
         {
-            String userid = params[0];
-            String title = params[1];
+            String user = params[0];
+            String proyecto = params[1];
+            String fechaRevision = params[2];
 
             String link = "http://atreveteacrecer.metrocasas.com.gt/insertRevision.php";
-            String data = URLEncoder.encode("userid", "UTF-8") + "=" + URLEncoder.encode(userid, "UTF-8")
-                    + "&" + URLEncoder.encode("title", "UTF-8") + "=" + URLEncoder.encode(title, "UTF-8");
+            String data = URLEncoder.encode("user_id", "UTF-8") + "=" + URLEncoder.encode(user, "UTF-8")
+                    + "&" + URLEncoder.encode("proyecto", "UTF-8") + "=" + URLEncoder.encode(proyecto, "UTF-8")
+                    + "&" + URLEncoder.encode("fechaRevision", "UTF-8") + "=" + URLEncoder.encode(fechaRevision, "UTF-8");
 
             URL url = new URL(link);
             URLConnection conn = url.openConnection();
@@ -56,12 +61,9 @@ public class IngresoRevision extends AsyncTask<String, Integer, String> {
                 sb.append(line);
             }
             JSONObject jsonObject = new JSONObject(sb.toString());
-            JSONArray jsonArray = jsonObject.getJSONArray("project");
-            if(jsonArray.length() > 0)
-            {
-                JSONObject objecto = jsonArray.getJSONObject(0);
-                revisionid = objecto.getString("id");
-            }
+            JSONArray jsonArray = jsonObject.getJSONArray("revisiones");
+            revisionid  = jsonArray.getJSONObject(0).getString("id");
+
             for (Elemento i:listElemento) {
                 link = "http://atreveteacrecer.metrocasas.com.gt/insertDetalleRevision.php";
                 data = URLEncoder.encode("revision_id", "UTF-8") + "=" + URLEncoder.encode(revisionid, "UTF-8")
@@ -84,18 +86,18 @@ public class IngresoRevision extends AsyncTask<String, Integer, String> {
                 {
                     sb.append(line);
                 }
-
             }
             listElemento.clear();
             return "success";
         }
         catch(Exception e)  {
-            return "error";
+            return e.toString();
         }
     }
 
     @Override
     protected void onPreExecute() {
+
     }
 
     @Override
@@ -113,6 +115,7 @@ public class IngresoRevision extends AsyncTask<String, Integer, String> {
                         }
                     }).show();
         } else {
+            Log.i("ERROR", result);
             Snackbar.make(v, "Ocurrió un error al cargar los datos", Snackbar.LENGTH_INDEFINITE)
                     .setActionTextColor(Color.RED)
                     .setAction("Aceptar", new View.OnClickListener() {
