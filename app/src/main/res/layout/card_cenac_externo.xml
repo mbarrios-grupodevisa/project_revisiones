@@ -30,14 +30,17 @@
                 android:background="@color/colorAccent"
                 android:textColor="#FFFFFF"
                 android:text="CENAC EXTERNO"
-                android:id="@+id/text_view_title_cenac"
+                android:drawableRight="@drawable/arrow_up"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:id="@+id/text_view_title_cenac_externo"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:gravity="center_horizontal"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/text_view_title_cenac"
+                android:layout_below="@+id/text_view_title_cenac_externo"
                 android:orientation="vertical">
 
                 <android.support.v7.widget.RecyclerView

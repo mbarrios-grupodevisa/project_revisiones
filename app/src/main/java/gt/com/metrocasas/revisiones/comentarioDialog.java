@@ -6,6 +6,8 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,6 +15,8 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -25,6 +29,8 @@ public class comentarioDialog extends DialogFragment {
 
     private EditText comentario;
     private ImageView imagen;
+    private Button btn_coment;
+
     OnSimpleDialogListener listener;
     Elemento item;
     private String pictureImagePath = "";
@@ -57,13 +63,15 @@ public class comentarioDialog extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                             listener.onPossitiveButtonClick(null);
-                            if(!comentario.getText().toString().equals("") || !imgFile.exists())
+                            if(!comentario.getText().toString().equals(""))
                             {
+                                if(imgFile != null){
+                                    item.setImagen(imgFile.getName());
+                                    item.setImagePath(imgFile.getAbsolutePath());
+                                }
                                 item.setComentario(comentario.getText().toString());
-                                item.setImagen(imgFile.getName());
-                                item.setImagePath(imgFile.getAbsolutePath());
-                                Toast.makeText(v.getContext(),"Ingreso Comentario",Toast.LENGTH_LONG).show();
-
+                                btn_coment.setBackgroundColor(Color.parseColor("#4caf50"));
+                                btn_coment.setTextColor(Color.WHITE);
                             }else{
                                 comentarioDialog.this.getDialog().dismiss();
                             }
@@ -119,5 +127,9 @@ public class comentarioDialog extends DialogFragment {
                 imagen.setImageResource(0);
             }
         }
+    }
+
+    public void setBtn_coment(Button btn_coment) {
+        this.btn_coment = btn_coment;
     }
 }

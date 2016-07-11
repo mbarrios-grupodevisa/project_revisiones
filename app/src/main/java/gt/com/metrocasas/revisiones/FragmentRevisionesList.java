@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,8 @@ import java.util.List;
  */
 public class FragmentRevisionesList extends Fragment {
 
+    private static final int ACTIVITY_REQUEST = 1;
+    private static final int RESULT_OK = 1;
     private List<ItemRevision> listRevision = new ArrayList<>();
     private RecyclerView recyclerView;
     private RevisionAdapter rAdapter;
@@ -37,7 +40,8 @@ public class FragmentRevisionesList extends Fragment {
 
                 Intent intent = new Intent(partenView.getContext(), DetalleRevisionActivity.class);
                 intent.putExtra("proyecto",proyecto);
-                startActivity(intent);
+                startActivityForResult(intent,ACTIVITY_REQUEST);
+                //startActivity(intent);
 
                 //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 //      .setAction("Action", null).show();
@@ -53,5 +57,18 @@ public class FragmentRevisionesList extends Fragment {
         new GetRevisiones(getActivity(),rAdapter,listRevision).execute(proyecto);
         //new RetornarRevisiones(getActivity(), rAdapter, listRevision).execute(proyecto);
         return partenView;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == ACTIVITY_REQUEST)
+        {
+            if(resultCode == RESULT_OK)
+            {
+                Toast.makeText(getActivity(),"Enrique" ,Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }

@@ -1,12 +1,16 @@
 package gt.com.metrocasas.revisiones;
 
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +61,78 @@ public class DetalleRevisionActivity extends AppCompatActivity implements View.O
             public void onClick(View view) {
                 //Envio de Datos
                 getListElements();
+                finish();
+            }
+        });
+
+        final TextView titulo_ci = (TextView) findViewById(R.id.text_view_title_cenac_interno);
+        titulo_ci.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(recyclerViewCenacInterno.getVisibility() == View.VISIBLE) {
+                    recyclerViewCenacInterno.setVisibility(View.GONE);
+                    titulo_ci.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.arrow_down,0);
+                }else {
+                    titulo_ci.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.arrow_up,0);
+                    recyclerViewCenacInterno.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        final TextView titulo_ce = (TextView) findViewById(R.id.text_view_title_cenac_externo);
+        titulo_ce.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(recyclerViewCenacExterno.getVisibility() == View.VISIBLE) {
+                    recyclerViewCenacExterno.setVisibility(View.GONE);
+                    titulo_ce.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.arrow_down,0);
+                }else {
+                    titulo_ce.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.arrow_up,0);
+                    recyclerViewCenacExterno.setVisibility(View.VISIBLE);
+
+                }
+            }
+        });
+
+        final TextView titulo_c = (TextView) findViewById(R.id.text_view_title_construccion);
+        titulo_c.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(recyclerViewConstruccion.getVisibility() == View.VISIBLE) {
+                    recyclerViewConstruccion.setVisibility(View.GONE);
+                    titulo_c.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.arrow_down,0);
+                }else {
+                    titulo_c.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.arrow_up,0);
+                    recyclerViewConstruccion.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        final TextView titulo_d = (TextView) findViewById(R.id.text_view_title_despensa);
+        titulo_d.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(recyclerViewDespensa.getVisibility() == View.VISIBLE) {
+                    recyclerViewDespensa.setVisibility(View.GONE);
+                    titulo_d.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.arrow_down,0);
+                }else {
+                    titulo_d.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.arrow_up,0);
+                    recyclerViewDespensa.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        final TextView titulo_l = (TextView) findViewById(R.id.text_view_title_limpieza);
+        titulo_l.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(recyclerViewLimpieza.getVisibility() == View.VISIBLE) {
+                    recyclerViewLimpieza.setVisibility(View.GONE);
+                    titulo_l.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.arrow_down,0);
+                }else {
+                    titulo_l.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.arrow_up,0);
+                    recyclerViewLimpieza.setVisibility(View.VISIBLE);
+                }
             }
         });
 

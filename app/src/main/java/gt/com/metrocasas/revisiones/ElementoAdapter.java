@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.v7.view.ContextThemeWrapper;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,13 +46,6 @@ public class ElementoAdapter extends RecyclerView.Adapter<ElementoAdapter.MyView
             elemento = (TextView) view.findViewById(R.id.element_revision);
             agregar_comentario = (Button) view.findViewById(R.id.element_btn);
 
-            agregar_comentario.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Toast.makeText(view.getContext(),"Agregar Comentario",Toast.LENGTH_LONG).show();
-                }
-            });
-
             estado.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
@@ -72,11 +66,8 @@ public class ElementoAdapter extends RecyclerView.Adapter<ElementoAdapter.MyView
                 public void onClick(View view) {
                     comentarioDialog comentario = new comentarioDialog();
                     comentario.setElement(object);
+                    comentario.setBtn_coment(agregar_comentario);
                     comentario.show(actividad.getFragmentManager(),"");
-
-                    estado.setEnabled(false);
-                    elemento.setPaintFlags(elemento.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-
                 }
             });
         }
@@ -104,6 +95,36 @@ public class ElementoAdapter extends RecyclerView.Adapter<ElementoAdapter.MyView
 
     public List<Elemento> getListElemento() {
         return listElemento;
+    }
+
+    public void hidenCardViewCenacInterno()
+    {
+        CardView card_view = (CardView) actividad.findViewById(R.id.card_view_cenac_interno);
+        card_view.setVisibility(View.GONE);
+    }
+
+    public void hidenCardViewCenacExterno()
+    {
+        CardView card_view = (CardView) actividad.findViewById(R.id.card_view_cenac_externo);
+        card_view.setVisibility(View.GONE);
+    }
+
+    public void hidenCardViewDespensa()
+    {
+        CardView card_view = (CardView) actividad.findViewById(R.id.card_view_despensa);
+        card_view.setVisibility(View.GONE);
+    }
+
+    public void hidenCardViewLimpieza()
+    {
+        CardView card_view = (CardView) actividad.findViewById(R.id.card_view_limpieza);
+        card_view.setVisibility(View.GONE);
+    }
+
+    public void hidenCardViewConstruccion()
+    {
+        CardView card_view = (CardView) actividad.findViewById(R.id.card_view_construccion);
+        card_view.setVisibility(View.GONE);
     }
 
 
