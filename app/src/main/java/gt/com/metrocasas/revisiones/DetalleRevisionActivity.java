@@ -118,8 +118,8 @@ public class DetalleRevisionActivity extends AppCompatActivity implements View.O
         List<Elemento> list = new ArrayList<>();
         list.addAll(listItemCI);
         list.addAll(listItemCE);
-        list.addAll(listItemLimpieza);
         list.addAll(listItemDespensa);
+        list.addAll(listItemLimpieza);
         list.addAll(listItemCostrucion);
         return list;
     }

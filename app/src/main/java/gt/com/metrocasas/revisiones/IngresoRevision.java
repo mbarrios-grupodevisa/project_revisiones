@@ -63,7 +63,6 @@ public class IngresoRevision extends AsyncTask<String, Integer, String> {
             JSONObject jsonObject = new JSONObject(sb.toString());
             JSONArray jsonArray = jsonObject.getJSONArray("revisiones");
             revisionid  = jsonArray.getJSONObject(0).getString("id");
-
             for (Elemento i:listElemento) {
                 link = "http://atreveteacrecer.metrocasas.com.gt/insertDetalleRevision.php";
                 data = URLEncoder.encode("revision_id", "UTF-8") + "=" + URLEncoder.encode(revisionid, "UTF-8")
@@ -88,7 +87,7 @@ public class IngresoRevision extends AsyncTask<String, Integer, String> {
                 }
             }
             listElemento.clear();
-            return "success";
+            return sb.toString();
         }
         catch(Exception e)  {
             return e.toString();
@@ -115,7 +114,6 @@ public class IngresoRevision extends AsyncTask<String, Integer, String> {
                         }
                     }).show();
         } else {
-            Log.i("ERROR", result);
             Snackbar.make(v, "Ocurrió un error al cargar los datos", Snackbar.LENGTH_INDEFINITE)
                     .setActionTextColor(Color.RED)
                     .setAction("Aceptar", new View.OnClickListener() {
