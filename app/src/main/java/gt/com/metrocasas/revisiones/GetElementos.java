@@ -2,7 +2,6 @@ package gt.com.metrocasas.revisiones;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -28,7 +27,6 @@ public class GetElementos extends AsyncTask<String, Integer, String> {
     ElementoAdapter lAdapter;
     ElementoAdapter cAdapter;
     public static String ERROR = "No se encontraron elementos de este proyecto";
-    ProgressBar progressBar;
 
     public GetElementos(Context context, ElementoAdapter iAdapter, ElementoAdapter eAdapter, ElementoAdapter dAdapter, ElementoAdapter lAdapter, ElementoAdapter cAdapter) {
         this.context = context;
@@ -67,9 +65,8 @@ public class GetElementos extends AsyncTask<String, Integer, String> {
             String line;
 
             // Read Server Response
-            while ((line = reader.readLine()) != null) {
+            if ((line = reader.readLine()) != null) {
                 sb.append(line);
-                break;
             }
             return sb.toString();
         } catch (Exception e) {

@@ -8,9 +8,6 @@ import android.widget.TextView;
 
 import java.util.List;
 
-/**
- * Created by Usuario on 05/07/2016.
- */
 public class RevisionAdapter extends RecyclerView.Adapter<RevisionAdapter.MyViewHolder>{
     private List<ItemRevision> listRevision;
 
