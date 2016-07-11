@@ -9,6 +9,15 @@ public class Elemento {
     private boolean estado;
     private String comentario;
     private String imagen;
+    private String imagePath;
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
 
     public Elemento(String id, String proyecto, String clasficacion, String elemento) {
         this.id = id;

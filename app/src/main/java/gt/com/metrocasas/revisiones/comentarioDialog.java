@@ -61,6 +61,7 @@ public class comentarioDialog extends DialogFragment {
                             {
                                 item.setComentario(comentario.getText().toString());
                                 item.setImagen(imgFile.getName());
+                                item.setImagePath(imgFile.getAbsolutePath());
                                 Toast.makeText(v.getContext(),"Ingreso Comentario",Toast.LENGTH_LONG).show();
 
                             }else{
