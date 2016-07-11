@@ -84,6 +84,7 @@ public class FragmentRevisionesList extends Fragment {
                 rAdapter.notifyDataSetChanged();
                 new GetRevisiones(getActivity(),rAdapter,listRevision,swipeContainer).execute(proyecto);
             }
+
         }
     }
 }
