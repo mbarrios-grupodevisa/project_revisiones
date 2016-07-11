@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
+    public String userid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +37,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Intent intent = new Intent(this, DetalleRevisionActivity.class);
-
-
+        userid = getIntent().getExtras().getString("id");
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -51,8 +51,6 @@ public class MainActivity extends AppCompatActivity
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 
         setFragment(1);
-
-
     }
 
     @Override
@@ -97,6 +95,7 @@ public class MainActivity extends AppCompatActivity
             Fragment fragment = new FragmentRevisionesList();
             Bundle args = new Bundle();
             args.putString("proyecto", "Viventi");
+            args.putString("id", userid);
             fragment.setArguments(args);
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction()
@@ -106,6 +105,7 @@ public class MainActivity extends AppCompatActivity
             Fragment fragment = new FragmentRevisionesList();
             Bundle args = new Bundle();
             args.putString("proyecto", "Casa Asuncion");
+            args.putString("id", userid);
             fragment.setArguments(args);
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction()
@@ -169,6 +169,7 @@ public class MainActivity extends AppCompatActivity
             Fragment fragment = new FragmentRevisionesList();
             Bundle args = new Bundle();
             args.putString("proyecto", "Viventi");
+            args.putString("id", userid);
             fragment.setArguments(args);
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction()
@@ -178,6 +179,7 @@ public class MainActivity extends AppCompatActivity
             Fragment fragment = new FragmentRevisionesList();
             Bundle args = new Bundle();
             args.putString("proyecto", "Casa Asuncion");
+            args.putString("id", userid);
             fragment.setArguments(args);
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction()

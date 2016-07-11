@@ -37,7 +37,7 @@ public class DetalleRevisionActivity extends AppCompatActivity implements View.O
     private RecyclerView recyclerViewConstruccion;
     private ElementoAdapter aAdapterConstruccion;
 
-    private String proyecto;
+    private String proyecto, user, fechaRevision;
     private View v;
     private Button enviar_datos;
 
@@ -48,7 +48,8 @@ public class DetalleRevisionActivity extends AppCompatActivity implements View.O
 
         v = findViewById(R.id.detalle);
         proyecto = getIntent().getExtras().getString("proyecto");
-        final String fechaRevision = new SimpleDateFormat("dd/MMMM/yyyy - HH:mm:ss").format(new Date());
+        user = getIntent().getExtras().getString("id");
+        fechaRevision = new SimpleDateFormat("dd/MMMM/yyyy - HH:mm:ss").format(new Date());
 
         recyclerViewCenacInterno = (RecyclerView) findViewById(R.id.recycler_view_ci);
         recyclerViewCenacExterno = (RecyclerView) findViewById(R.id.recycler_view_ce);
@@ -61,7 +62,7 @@ public class DetalleRevisionActivity extends AppCompatActivity implements View.O
             @Override
             public void onClick(View view) {
                 //Envio de Datos
-                new IngresoRevision(getApplicationContext(), getListElements(), v).execute("1",proyecto, fechaRevision);
+                new IngresoRevision(getApplicationContext(), getListElements(), v).execute(user, proyecto, fechaRevision);
             }
         });
 
@@ -95,7 +96,7 @@ public class DetalleRevisionActivity extends AppCompatActivity implements View.O
         recyclerViewConstruccion.setItemAnimator(new DefaultItemAnimator());
         recyclerViewConstruccion.setAdapter(aAdapterConstruccion);
 
-        new GetElementos(this,aAdapterCI,aAdapterCE,aAdapterDespensa,aAdapterLimpieza,aAdapterConstruccion).execute("Viventi");
+        new GetElementos(this,aAdapterCI,aAdapterCE,aAdapterDespensa,aAdapterLimpieza,aAdapterConstruccion).execute(proyecto);
 
     }
 

@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,13 +25,13 @@ public class FragmentRevisionesList extends Fragment {
     private List<ItemRevision> listRevision = new ArrayList<>();
     private RecyclerView recyclerView;
     private RevisionAdapter rAdapter;
-    private String proyecto;
+    private String proyecto, userid;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         final View partenView = inflater.inflate(R.layout.lista_revisiones, container, false);
-
+        userid = getArguments().getString("id");
         swipeContainer = (SwipeRefreshLayout)partenView.findViewById(R.id.swipeContainer);
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -53,6 +54,7 @@ public class FragmentRevisionesList extends Fragment {
 
                 Intent intent = new Intent(partenView.getContext(), DetalleRevisionActivity.class);
                 intent.putExtra("proyecto",proyecto);
+                intent.putExtra("id", userid);
                 startActivity(intent);
             }
         });
