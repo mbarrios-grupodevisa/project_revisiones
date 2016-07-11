@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by Usuario on 07/07/2016.
  */
-public class DetalleRevisionActivity extends AppCompatActivity implements View.OnClickListener {
+public class DetalleRevisionActivity extends AppCompatActivity implements View.OnClickListener, OnSimpleDialogListener{
 
     private List<Elemento> listItemCE = new ArrayList<>();
     private RecyclerView recyclerViewCenacExterno;
@@ -48,43 +48,41 @@ public class DetalleRevisionActivity extends AppCompatActivity implements View.O
         recyclerViewLimpieza = (RecyclerView) findViewById(R.id.recycler_view_limpieza);
         recyclerViewConstruccion = (RecyclerView) findViewById(R.id.recycler_view_construccion);
 
-        aAdapterCI = new ElementoAdapter(listItemCI);
+        aAdapterCI = new ElementoAdapter(listItemCI,this);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         recyclerViewCenacInterno.setLayoutManager(mLayoutManager);
         recyclerViewCenacInterno.setItemAnimator(new DefaultItemAnimator());
         recyclerViewCenacInterno.setAdapter(aAdapterCI);
 
-        aAdapterCE = new ElementoAdapter(listItemCE);
+        aAdapterCE = new ElementoAdapter(listItemCE,this);
         RecyclerView.LayoutManager mLayoutManagerCE = new LinearLayoutManager(this);
         recyclerViewCenacExterno.setLayoutManager(mLayoutManagerCE);
         recyclerViewCenacExterno.setItemAnimator(new DefaultItemAnimator());
         recyclerViewCenacExterno.setAdapter(aAdapterCE);
 
-        aAdapterDespensa = new ElementoAdapter(listItemDespensa);
+        aAdapterDespensa = new ElementoAdapter(listItemDespensa,this);
         RecyclerView.LayoutManager mLayoutManagerDespensa = new LinearLayoutManager(this);
         recyclerViewDespensa.setLayoutManager(mLayoutManagerDespensa);
         recyclerViewDespensa.setItemAnimator(new DefaultItemAnimator());
         recyclerViewDespensa.setAdapter(aAdapterDespensa);
 
-        aAdapterLimpieza = new ElementoAdapter(listItemLimpieza);
+        aAdapterLimpieza = new ElementoAdapter(listItemLimpieza,this);
         RecyclerView.LayoutManager mLayoutManagerLimpieza = new LinearLayoutManager(this);
         recyclerViewLimpieza.setLayoutManager(mLayoutManagerLimpieza);
         recyclerViewLimpieza.setItemAnimator(new DefaultItemAnimator());
         recyclerViewLimpieza.setAdapter(aAdapterLimpieza);
 
-        aAdapterConstruccion = new ElementoAdapter(listItemCostrucion);
+        aAdapterConstruccion = new ElementoAdapter(listItemCostrucion,this);
         RecyclerView.LayoutManager mLayoutManagerConstruccion = new LinearLayoutManager(this);
         recyclerViewConstruccion.setLayoutManager(mLayoutManagerConstruccion);
         recyclerViewConstruccion.setItemAnimator(new DefaultItemAnimator());
         recyclerViewConstruccion.setAdapter(aAdapterConstruccion);
 
         new GetElementos(this,aAdapterCI,aAdapterCE,aAdapterDespensa,aAdapterLimpieza,aAdapterConstruccion).execute("Viventi");
-
     }
 
     @Override
     public void onClick(View view) {
-
     }
 
     private void testValues(){
@@ -141,5 +139,13 @@ public class DetalleRevisionActivity extends AppCompatActivity implements View.O
         aAdapterLimpieza.notifyDataSetChanged();
         aAdapterDespensa.notifyDataSetChanged();
         aAdapterConstruccion.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onPossitiveButtonClick(Elemento apto) {
+    }
+
+    @Override
+    public void onNegativeButtonClick() {
     }
 }
