@@ -28,14 +28,14 @@
             android:layout_height="wrap_content"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:paddingTop="10dp"
+            android:paddingTop="5dp"
             android:layout_below="@+id/title_dialog">
 
             <ImageView
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:background="#a2b6a1"
-                android:paddingTop="10dp"
+                android:src="@android:drawable/ic_menu_add"
                 android:layout_centerHorizontal="true"
                 android:id="@+id/Foto"/>
 
@@ -43,6 +43,7 @@
                 android:id="@+id/textInput_amenities"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:layout_below="@+id/Foto">
 
                 <EditText
@@ -51,14 +52,10 @@
                     android:inputType="textMultiLine"
                     android:hint="Comentarios"
                     android:ems="10"
-                    android:lines="4"
+                    android:lines="3"
                     android:id="@+id/editText_comentario"
                     android:layout_alignParentStart="true" />
             </android.support.design.widget.TextInputLayout>
-
         </RelativeLayout>
-
     </RelativeLayout>
-
-
 </RelativeLayout>
