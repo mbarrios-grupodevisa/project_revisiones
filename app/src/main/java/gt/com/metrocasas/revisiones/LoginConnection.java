@@ -56,9 +56,8 @@ public class LoginConnection extends AsyncTask<String, Integer, String> {
             BufferedReader reader = new BufferedReader(new InputStreamReader((conn.getInputStream())));
             StringBuilder sb = new StringBuilder();
             String line;
-            while ((line = reader.readLine()) != null) {
+            if ((line = reader.readLine()) != null) {
                 sb.append(line);
-                break;
             }
             return sb.toString();
         } catch (Exception e) {

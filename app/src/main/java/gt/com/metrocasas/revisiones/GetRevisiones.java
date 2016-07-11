@@ -52,9 +52,8 @@ public class GetRevisiones extends AsyncTask<String, Integer, String> {
             String line;
 
             // Read Server Response
-            while ((line = reader.readLine()) != null) {
+            if ((line = reader.readLine()) != null) {
                 sb.append(line);
-                break;
             }
             return sb.toString();
         } catch (Exception e) {

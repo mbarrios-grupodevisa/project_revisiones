@@ -2,12 +2,6 @@ package gt.com.metrocasas.revisiones;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.support.design.widget.Snackbar;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.ScrollView;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -18,16 +12,10 @@ import java.net.URLEncoder;
 public class IngresoElemento extends AsyncTask<String, Integer, String> {
 
     Context context;
-    ProgressBar progreso;
-    LinearLayout p;
-    ScrollView q;
     public static String ERROR = "Error en los datos, revise";
 
-    public IngresoElemento(Context context, ProgressBar progreso, LinearLayout p, ScrollView q) {
+    public IngresoElemento(Context context) {
         this.context = context;
-        this.progreso = progreso;
-        this.p = p;
-        this.q = q;
     }
 
     @Override
@@ -54,10 +42,9 @@ public class IngresoElemento extends AsyncTask<String, Integer, String> {
             BufferedReader reader = new BufferedReader(new InputStreamReader((conn.getInputStream())));
             StringBuilder sb = new StringBuilder();
             String line;
-            while((line = reader.readLine()) != null)
+            if((line = reader.readLine()) != null)
             {
                 sb.append(line);
-                break;
             }
             return sb.toString();
         }
@@ -72,20 +59,12 @@ public class IngresoElemento extends AsyncTask<String, Integer, String> {
 
     @Override
     protected void onProgressUpdate(Integer... progress) {
-        this.progreso.setProgress(progress[0]);
+
     }
 
     @Override
     protected void onPostExecute(String result) {
-        Snackbar.make(q, "¡Datos Cargados Exitosamente!", Snackbar.LENGTH_INDEFINITE)
-                .setAction("Aceptar", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
 
-                    }
-                }).show();
-        p.setVisibility(View.GONE);
-        q.setVisibility(View.VISIBLE);
     }
 
 }

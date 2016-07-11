@@ -11,21 +11,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Usuario on 05/07/2016.
- */
 public class FragmentRevisionesList extends Fragment {
 
     private static final int ACTIVITY_REQUEST = 1;
-    private static final int RESULT_OK = 1;
     private SwipeRefreshLayout swipeContainer;
     private List<ItemRevision> listRevision = new ArrayList<>();
-    private RecyclerView recyclerView;
     private RevisionAdapter rAdapter;
     private String proyecto, userid;
 
@@ -48,20 +41,15 @@ public class FragmentRevisionesList extends Fragment {
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
 
-        recyclerView = (RecyclerView) partenView.findViewById(R.id.recycler_view);
+        RecyclerView recyclerView = (RecyclerView) partenView.findViewById(R.id.recycler_view);
         FloatingActionButton fab = (FloatingActionButton) partenView.findViewById(R.id.btn_nuevo);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent(partenView.getContext(), DetalleRevisionActivity.class);
                 intent.putExtra("proyecto",proyecto);
                 intent.putExtra("id", userid);
                 startActivityForResult(intent,ACTIVITY_REQUEST);
-                //startActivity(intent);
-
-                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                //      .setAction("Action", null).show();
             }
         });
 
@@ -72,20 +60,11 @@ public class FragmentRevisionesList extends Fragment {
         recyclerView.setAdapter(rAdapter);
         proyecto = getArguments().getString("proyecto");
         new GetRevisiones(getActivity(),rAdapter,listRevision,swipeContainer).execute(proyecto);
-        //new RetornarRevisiones(getActivity(), rAdapter, listRevision).execute(proyecto);
         return partenView;
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        if(requestCode == ACTIVITY_REQUEST)
-        {
-            if(resultCode == RESULT_OK)
-            {
-                Toast.makeText(getActivity(),"Enrique" ,Toast.LENGTH_LONG).show();
-            }
-        }
     }
 }
