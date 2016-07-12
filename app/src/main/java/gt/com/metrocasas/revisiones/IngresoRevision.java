@@ -1,10 +1,16 @@
 package gt.com.metrocasas.revisiones;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.io.BufferedReader;
@@ -13,17 +19,25 @@ import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
-import java.util.List;
 
 public class IngresoRevision extends AsyncTask<String, Integer, String> {
 
     View v;
     Context context;
     String revisionid;
+    LinearLayout p, q;
+    ProgressBar progreso;
+    AppCompatActivity activity;
+    TextView info;
 
-    public IngresoRevision(Context context, View v) {
+    public IngresoRevision(Context context, View v, LinearLayout p, LinearLayout q, ProgressBar progreso, AppCompatActivity activity, TextView info) {
         this.context = context;
         this.v = v;
+        this.p = p;
+        this.q = q;
+        this.progreso = progreso;
+        this.activity = activity;
+        this.info = info;
     }
 
     @Override
@@ -87,32 +101,19 @@ public class IngresoRevision extends AsyncTask<String, Integer, String> {
 
     @Override
     protected void onPreExecute() {
-
+        info.setText(R.string.guardando);
     }
 
     @Override
     protected void onProgressUpdate(Integer... progress) {
-
+        progreso.setProgress(progress[0]);
     }
 
     @Override
     protected void onPostExecute(String result) {
-        if(result.equals("success")) {
-            Snackbar.make(v, "¡Datos ingresados exitosamente!", Snackbar.LENGTH_INDEFINITE)
-                    .setAction("Aceptar", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                        }
-                    }).show();
-        } else {
-            Snackbar.make(v, "Ocurrió un error al cargar los datos", Snackbar.LENGTH_INDEFINITE)
-                    .setActionTextColor(Color.RED)
-                    .setAction("Aceptar", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                        }
-                    }).show();
-        }
+        p.setVisibility(View.GONE);
+        q.setVisibility(View.VISIBLE);
+        activity.finish();
     }
 
 }

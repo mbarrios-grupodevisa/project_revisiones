@@ -57,7 +57,7 @@ public class comentarioDialog extends DialogFragment {
                 .setPositiveButton(R.string.btn_aceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                            if(!comentario.getText().toString().equals(""))
+                            if(!comentario.getText().toString().equals("") || imgFile != null)
                             {
                                 if(imgFile != null){
                                     item.setImagen(imgFile.getName());

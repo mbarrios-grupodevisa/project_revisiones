@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
-            android:text="Nuevo Elemento de Revisión"
+            android:text="@string/nuevoelementorevision"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:id="@+id/title_dialog"
             android:background="@color/colorAccent"

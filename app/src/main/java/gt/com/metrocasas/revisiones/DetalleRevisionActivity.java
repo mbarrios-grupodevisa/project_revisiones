@@ -51,6 +51,7 @@ public class DetalleRevisionActivity extends AppCompatActivity implements View.O
     private String user;
     private String fechaRevision;
     private View v;
+    TextView info;
     LinearLayout p, q;
     ProgressBar progreso;
 
@@ -70,6 +71,7 @@ public class DetalleRevisionActivity extends AppCompatActivity implements View.O
         q = (LinearLayout)findViewById(R.id.layoutlist2);
         progreso = (ProgressBar)findViewById(R.id.progressBar2);
         progreso.setProgress(0);
+        info = (TextView)findViewById(R.id.tvUpload2);
         v = findViewById(R.id.detalle);
         proyecto = getIntent().getExtras().getString("proyecto");
         user = getIntent().getExtras().getString("id");
@@ -86,6 +88,9 @@ public class DetalleRevisionActivity extends AppCompatActivity implements View.O
         enviar_datos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                p.setVisibility(View.VISIBLE);
+                q.setVisibility(View.GONE);
+                progreso.setProgress(0);
                 upLoadPictures();
             }
         });
@@ -231,7 +236,7 @@ public class DetalleRevisionActivity extends AppCompatActivity implements View.O
 
                     @Override
                     public void onProgressChanged(int id, long bytesCurrent, long bytesTotal) {
-
+                        progreso.setProgress((int)bytesCurrent);
                     }
 
                     @Override
@@ -248,11 +253,11 @@ public class DetalleRevisionActivity extends AppCompatActivity implements View.O
 
     public void ingresarInformacion() {
         String json = getJSON(getListElements());
-        new IngresoRevision(getApplicationContext(), v).execute(user, proyecto, fechaRevision, json);
         Intent databack = new Intent();
         databack.putExtra("fecha",fechaRevision);
         if(proyecto.equals("Viventi")) setResult(VIVENTI,databack);
-        if(proyecto.equals("Casa Asuncion")) setResult(CASA_ASUNCION,databack);
+        if(proyecto.equals("Casa Asunción")) setResult(CASA_ASUNCION,databack);
+        new IngresoRevision(getApplicationContext(), v, p, q, progreso, this, info).execute(user, proyecto, fechaRevision, json);
     }
 
     public void limpiarCampos() {
@@ -290,5 +295,13 @@ public class DetalleRevisionActivity extends AppCompatActivity implements View.O
         } catch (Exception e) {
             return "null";
         }
+    }
+
+    public void finalizar() {
+        Intent databack = new Intent();
+        databack.putExtra("fecha",fechaRevision);
+        if(proyecto.equals("Viventi")) setResult(VIVENTI,databack);
+        if(proyecto.equals("Casa Asuncion")) setResult(CASA_ASUNCION,databack);
+        this.finish();
     }
 }

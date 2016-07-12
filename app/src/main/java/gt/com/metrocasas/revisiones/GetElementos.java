@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -53,7 +54,6 @@ public class GetElementos extends AsyncTask<String, Integer, String> {
     @Override
     protected String doInBackground(String... params) {
         try {
-
             String proyecto = params[0];
             String link = "http://atreveteacrecer.metrocasas.com.gt/getProjectElements.php";
             String data = URLEncoder.encode("proyecto", "UTF-8") + "=" + URLEncoder.encode(proyecto, "UTF-8");

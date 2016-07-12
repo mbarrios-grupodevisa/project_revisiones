@@ -2,13 +2,16 @@ package gt.com.metrocasas.revisiones;
 
 import android.app.Fragment;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Layout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +28,7 @@ public class FragmentRevisionesList extends Fragment {
     private static final int CASA_ASUNCION = 4;
     private SwipeRefreshLayout swipeContainer;
     private List<ItemRevision> listRevision = new ArrayList<>();
+    FloatingActionButton fab;
     private RevisionAdapter rAdapter;
     private String proyecto, userid;
     LinearLayout p, q;
@@ -54,7 +58,7 @@ public class FragmentRevisionesList extends Fragment {
                 android.R.color.holo_red_light);
 
         RecyclerView recyclerView = (RecyclerView) partenView.findViewById(R.id.recycler_view);
-        FloatingActionButton fab = (FloatingActionButton) partenView.findViewById(R.id.btn_nuevo);
+        fab = (FloatingActionButton) partenView.findViewById(R.id.btn_nuevo);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,22 +82,43 @@ public class FragmentRevisionesList extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if(requestCode == ACTIVITY_REQUEST)
         {
             if(resultCode == VIVENTI)
             {
                 listRevision.clear();
                 rAdapter.notifyDataSetChanged();
-                new GetRevisiones(getActivity(), rAdapter, listRevision, swipeContainer, p, q, progreso).execute(proyecto);
+                p.setVisibility(View.VISIBLE);
+                q.setVisibility(View.GONE);
+                progreso.setProgress(0);
+                new GetRevisiones(getActivity(), rAdapter, listRevision, swipeContainer, p, q, progreso).execute(proyecto, userid);
+                Snackbar.make(q, "Datos Cargados Correctamente", Snackbar.LENGTH_INDEFINITE)
+                        .setActionTextColor(getResources().getColor(R.color.colorPrimary))
+                        .setAction("ACEPTAR", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                            }
+                        })
+                        .show();
             }
             if(resultCode == CASA_ASUNCION)
             {
                 listRevision.clear();
                 rAdapter.notifyDataSetChanged();
-                new GetRevisiones(getActivity(), rAdapter, listRevision, swipeContainer, p, q, progreso).execute(proyecto);
-            }
+                p.setVisibility(View.VISIBLE);
+                q.setVisibility(View.GONE);
+                progreso.setProgress(0);
+                new GetRevisiones(getActivity(), rAdapter, listRevision, swipeContainer, p, q, progreso).execute(proyecto, userid);
+                Snackbar.make(q, "Datos Cargados Correctamente", Snackbar.LENGTH_INDEFINITE)
+                        .setActionTextColor(getResources().getColor(R.color.colorPrimary))
+                        .setAction("ACEPTAR", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
 
+                            }
+                        })
+                        .show();
+            }
         }
     }
 }
