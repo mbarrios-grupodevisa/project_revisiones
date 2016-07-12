@@ -8,6 +8,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,8 +47,12 @@ public class DetalleRevisionActivity extends AppCompatActivity implements View.O
     private List<Elemento> listItemCostrucion = new ArrayList<>();
     private RecyclerView recyclerViewConstruccion;
 
-    private String proyecto, user, fechaRevision, json;
+    private String proyecto;
+    private String user;
+    private String fechaRevision;
     private View v;
+    LinearLayout p, q;
+    ProgressBar progreso;
 
     private static final int VIVENTI = 3;
     private static final int CASA_ASUNCION = 4;
@@ -60,6 +66,10 @@ public class DetalleRevisionActivity extends AppCompatActivity implements View.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_detalle_revision);
 
+        p = (LinearLayout)findViewById(R.id.layoutprogress2);
+        q = (LinearLayout)findViewById(R.id.layoutlist2);
+        progreso = (ProgressBar)findViewById(R.id.progressBar2);
+        progreso.setProgress(0);
         v = findViewById(R.id.detalle);
         proyecto = getIntent().getExtras().getString("proyecto");
         user = getIntent().getExtras().getString("id");
@@ -185,7 +195,7 @@ public class DetalleRevisionActivity extends AppCompatActivity implements View.O
         recyclerViewConstruccion.setAdapter(aAdapterConstruccion);
         //</editor-fold>
 
-        new GetElementos(this, aAdapterCI, aAdapterCE, aAdapterDespensa, aAdapterLimpieza, aAdapterConstruccion).execute(proyecto);
+        new GetElementos(this, aAdapterCI, aAdapterCE, aAdapterDespensa, aAdapterLimpieza, aAdapterConstruccion, p, q, progreso).execute(proyecto);
     }
 
     @Override
@@ -237,7 +247,7 @@ public class DetalleRevisionActivity extends AppCompatActivity implements View.O
     }
 
     public void ingresarInformacion() {
-        json = getJSON(getListElements());
+        String json = getJSON(getListElements());
         new IngresoRevision(getApplicationContext(), v).execute(user, proyecto, fechaRevision, json);
         Intent databack = new Intent();
         databack.putExtra("fecha",fechaRevision);

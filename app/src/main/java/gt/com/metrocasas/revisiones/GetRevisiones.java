@@ -3,11 +3,15 @@ package gt.com.metrocasas.revisiones;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.LineNumberReader;
 import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
@@ -19,15 +23,20 @@ public class GetRevisiones extends AsyncTask<String, Integer, String> {
 
     Context context;
     private SwipeRefreshLayout swipeContainer;
-    public static String ERROR = "No se encontraron revisiones";
+    public static String ERROR = "No se encontraron revisiones para este proyecto";
     private RevisionAdapter rAdapter;
     private List<ItemRevision> listRevision = new ArrayList<>();
+    LinearLayout p, q;
+    ProgressBar progreso;
 
-    public GetRevisiones(Context context, RevisionAdapter rAdapter, List<ItemRevision> listRevision, SwipeRefreshLayout swipeContainer) {
+    public GetRevisiones(Context context, RevisionAdapter rAdapter, List<ItemRevision> listRevision, SwipeRefreshLayout swipeContainer, LinearLayout p, LinearLayout q, ProgressBar progreso) {
         this.context = context;
         this.rAdapter = rAdapter;
         this.listRevision = listRevision;
         this.swipeContainer = swipeContainer;
+        this.p = p;
+        this.q = q;
+        this.progreso = progreso;
     }
     @Override
     protected String doInBackground(String... params) {
@@ -69,6 +78,7 @@ public class GetRevisiones extends AsyncTask<String, Integer, String> {
 
     @Override
     protected void onProgressUpdate(Integer... progress) {
+        progreso.setProgress(progress[0]);
     }
 
     @Override
@@ -88,8 +98,10 @@ public class GetRevisiones extends AsyncTask<String, Integer, String> {
 
             }
         } catch (Exception e) {
-            Toast.makeText(this.context, ERROR, Toast.LENGTH_LONG).show();
+            Toast.makeText(this.context, ERROR, Toast.LENGTH_SHORT).show();
         }
+        p.setVisibility(View.GONE);
+        q.setVisibility(View.VISIBLE);
         swipeContainer.setRefreshing(false);
         rAdapter.notifyDataSetChanged();
     }
