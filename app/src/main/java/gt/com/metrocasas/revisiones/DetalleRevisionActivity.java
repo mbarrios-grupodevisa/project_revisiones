@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class DetalleRevisionActivity extends AppCompatActivity implements View.OnClickListener, OnSimpleDialogListener{
+public class DetalleRevisionActivity extends AppCompatActivity implements View.OnClickListener{
 
     private List<Elemento> listItemCE = new ArrayList<>();
     private RecyclerView recyclerViewCenacExterno;
@@ -191,14 +191,6 @@ public class DetalleRevisionActivity extends AppCompatActivity implements View.O
     @Override
     public void onClick(View view) {
 
-    }
-
-    @Override
-    public void onPossitiveButtonClick(Elemento apto) {
-    }
-
-    @Override
-    public void onNegativeButtonClick() {
     }
 
     private boolean bandera = true;

@@ -1,12 +1,9 @@
 package gt.com.metrocasas.revisiones;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.graphics.Paint;
-import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +11,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
-
-import static gt.com.metrocasas.revisiones.R.style.boton;
 
 
 /**
@@ -67,7 +61,7 @@ public class ElementoAdapter extends RecyclerView.Adapter<ElementoAdapter.MyView
             agregar_comentario.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    comentarioDialog comentario = new comentarioDialog();
+                    ComentarioDialog comentario = new ComentarioDialog();
                     comentario.setElement(e);
                     comentario.setBtn_coment(agregar_comentario);
                     comentario.show(actividad.getFragmentManager(),"");

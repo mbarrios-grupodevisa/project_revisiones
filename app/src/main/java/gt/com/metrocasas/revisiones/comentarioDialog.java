@@ -1,6 +1,5 @@
 package gt.com.metrocasas.revisiones;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -22,13 +21,12 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class comentarioDialog extends DialogFragment {
+public class ComentarioDialog extends DialogFragment {
 
     private EditText comentario;
     private ImageView imagen;
     private Button btn_coment;
 
-    OnSimpleDialogListener listener;
     Elemento item;
     private String pictureImagePath = "";
     public final static int RESULT_CAMERA = 1;
@@ -59,7 +57,6 @@ public class comentarioDialog extends DialogFragment {
                 .setPositiveButton(R.string.btn_aceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                            listener.onPossitiveButtonClick(null);
                             if(!comentario.getText().toString().equals(""))
                             {
                                 if(imgFile != null){
@@ -70,36 +67,21 @@ public class comentarioDialog extends DialogFragment {
                                 btn_coment.setBackgroundColor(Color.parseColor("#4caf50"));
                                 btn_coment.setTextColor(Color.WHITE);
                             }else{
-                                comentarioDialog.this.getDialog().dismiss();
+                                ComentarioDialog.this.getDialog().dismiss();
                             }
 
                     }
                 })
                 .setNegativeButton(R.string.btn_cancelar, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        listener.onNegativeButtonClick();
-                        comentarioDialog.this.getDialog().cancel();
+                        ComentarioDialog.this.getDialog().cancel();
                     }
                 });
 
         return builder.create();
     }
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-
-        try {
-            listener = (OnSimpleDialogListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(
-                    activity.toString() +
-                            " no implementó OnSetTitleListener");
-
-        }
-    }
-
-    public void setElement(Elemento e){
+        public void setElement(Elemento e){
         this.item = e;
     }
 
