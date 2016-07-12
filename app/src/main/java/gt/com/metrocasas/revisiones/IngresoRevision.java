@@ -78,7 +78,7 @@ public class IngresoRevision extends AsyncTask<String, Integer, String> {
                     sb.append(line);
                 }
 
-            return sb.toString();
+            return "success";
         }
         catch(Exception e)  {
             return e.toString();
