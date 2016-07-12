@@ -4,11 +4,9 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/viventi"
-
             android:title="Viventi" />
         <item
             android:id="@+id/casa_asuncion"
-
             android:title="Casa Asunción" />
     </group>
 

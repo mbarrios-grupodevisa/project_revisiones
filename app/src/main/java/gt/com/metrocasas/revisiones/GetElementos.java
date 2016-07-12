@@ -2,6 +2,9 @@ package gt.com.metrocasas.revisiones;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -26,9 +29,11 @@ public class GetElementos extends AsyncTask<String, Integer, String> {
     ElementoAdapter dAdapter;
     ElementoAdapter lAdapter;
     ElementoAdapter cAdapter;
+    LinearLayout p, q;
+    ProgressBar progreso;
     public static String ERROR = "No se encontraron elementos de este proyecto";
 
-    public GetElementos(Context context, ElementoAdapter iAdapter, ElementoAdapter eAdapter, ElementoAdapter dAdapter, ElementoAdapter lAdapter, ElementoAdapter cAdapter) {
+    public GetElementos(Context context, ElementoAdapter iAdapter, ElementoAdapter eAdapter, ElementoAdapter dAdapter, ElementoAdapter lAdapter, ElementoAdapter cAdapter,  LinearLayout p, LinearLayout q, ProgressBar progreso) {
         this.context = context;
         this.iAdapter = iAdapter;
         this.eAdapter = eAdapter;
@@ -40,6 +45,9 @@ public class GetElementos extends AsyncTask<String, Integer, String> {
         this.listDespensa = dAdapter.getListElemento();
         this.listLimpieza = lAdapter.getListElemento();
         this.listConstruccion = cAdapter.getListElemento();
+        this.p = p;
+        this.q = q;
+        this.progreso = progreso;
     }
 
     @Override
@@ -80,6 +88,7 @@ public class GetElementos extends AsyncTask<String, Integer, String> {
 
     @Override
     protected void onProgressUpdate(Integer... progress) {
+        progreso.setProgress(progress[0]);
     }
 
     @Override
@@ -104,15 +113,17 @@ public class GetElementos extends AsyncTask<String, Integer, String> {
                     } else if(objecto.getString("clasificacion").equals("Limpieza")) {
                         Elemento item = new Elemento(objecto.getString("id"), objecto.getString("proyecto"), objecto.getString("clasificacion"), objecto.getString("elemento"));
                         listLimpieza.add(item);
-                    } else if(objecto.getString("clasificacion").equals("Construccion")) {
+                    } else if(objecto.getString("clasificacion").equals("Construcción")) {
                         Elemento item = new Elemento(objecto.getString("id"), objecto.getString("proyecto"), objecto.getString("clasificacion"), objecto.getString("elemento"));
                         listConstruccion.add(item);
                     }
                 }
             }
         } catch (Exception e) {
-            Toast.makeText(this.context, ERROR, Toast.LENGTH_LONG).show();
+            Toast.makeText(this.context, ERROR, Toast.LENGTH_SHORT).show();
         }
+        p.setVisibility(View.GONE);
+        q.setVisibility(View.VISIBLE);
         iAdapter.notifyDataSetChanged();
         eAdapter.notifyDataSetChanged();
         dAdapter.notifyDataSetChanged();

@@ -8,9 +8,13 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,11 +27,17 @@ public class FragmentRevisionesList extends Fragment {
     private List<ItemRevision> listRevision = new ArrayList<>();
     private RevisionAdapter rAdapter;
     private String proyecto, userid;
+    LinearLayout p, q;
+    ProgressBar progreso;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         final View partenView = inflater.inflate(R.layout.lista_revisiones, container, false);
+        p = (LinearLayout)partenView.findViewById(R.id.layoutprogress);
+        q = (LinearLayout)partenView.findViewById(R.id.layoutlist);
+        progreso = (ProgressBar)partenView.findViewById(R.id.progressBar);
+        progreso.setProgress(0);
         userid = getArguments().getString("id");
         swipeContainer = (SwipeRefreshLayout)partenView.findViewById(R.id.swipeContainer);
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -35,7 +45,7 @@ public class FragmentRevisionesList extends Fragment {
             public void onRefresh() {
                 listRevision.clear();
                 rAdapter.notifyDataSetChanged();
-                new GetRevisiones(getActivity(),rAdapter,listRevision,swipeContainer).execute(proyecto, userid);
+                new GetRevisiones(getActivity(), rAdapter, listRevision, swipeContainer, p, q, progreso).execute(proyecto, userid);
             }
         });
         swipeContainer.setColorSchemeResources(android.R.color.holo_green_light,
@@ -61,7 +71,7 @@ public class FragmentRevisionesList extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(rAdapter);
         proyecto = getArguments().getString("proyecto");
-        new GetRevisiones(getActivity(),rAdapter,listRevision,swipeContainer).execute(proyecto, userid);
+        new GetRevisiones(getActivity(), rAdapter, listRevision, swipeContainer, p, q, progreso).execute(proyecto, userid);
         return partenView;
     }
 
@@ -75,13 +85,13 @@ public class FragmentRevisionesList extends Fragment {
             {
                 listRevision.clear();
                 rAdapter.notifyDataSetChanged();
-                new GetRevisiones(getActivity(),rAdapter,listRevision,swipeContainer).execute(proyecto);
+                new GetRevisiones(getActivity(), rAdapter, listRevision, swipeContainer, p, q, progreso).execute(proyecto);
             }
             if(resultCode == CASA_ASUNCION)
             {
                 listRevision.clear();
                 rAdapter.notifyDataSetChanged();
-                new GetRevisiones(getActivity(),rAdapter,listRevision,swipeContainer).execute(proyecto);
+                new GetRevisiones(getActivity(), rAdapter, listRevision, swipeContainer, p, q, progreso).execute(proyecto);
             }
 
         }
