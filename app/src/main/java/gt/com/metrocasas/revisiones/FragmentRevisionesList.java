@@ -17,7 +17,6 @@ import java.util.List;
 public class FragmentRevisionesList extends Fragment {
 
     private static final int ACTIVITY_REQUEST = 1;
-    private static final int RESULT_OK = 2;
     private static final int VIVENTI = 3;
     private static final int CASA_ASUNCION = 4;
     private SwipeRefreshLayout swipeContainer;
@@ -36,7 +35,7 @@ public class FragmentRevisionesList extends Fragment {
             public void onRefresh() {
                 listRevision.clear();
                 rAdapter.notifyDataSetChanged();
-                new GetRevisiones(getActivity(),rAdapter,listRevision,swipeContainer).execute(proyecto);
+                new GetRevisiones(getActivity(),rAdapter,listRevision,swipeContainer).execute(proyecto, userid);
             }
         });
         swipeContainer.setColorSchemeResources(android.R.color.holo_green_light,
@@ -62,7 +61,7 @@ public class FragmentRevisionesList extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(rAdapter);
         proyecto = getArguments().getString("proyecto");
-        new GetRevisiones(getActivity(),rAdapter,listRevision,swipeContainer).execute(proyecto);
+        new GetRevisiones(getActivity(),rAdapter,listRevision,swipeContainer).execute(proyecto, userid);
         return partenView;
     }
 

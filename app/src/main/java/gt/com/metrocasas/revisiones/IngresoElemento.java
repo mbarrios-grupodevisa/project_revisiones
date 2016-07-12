@@ -2,6 +2,9 @@ package gt.com.metrocasas.revisiones;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
+import android.widget.Toast;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -23,13 +26,13 @@ public class IngresoElemento extends AsyncTask<String, Integer, String> {
         try
         {
             String proyecto = params[0];
-            String clasficiacion = params[1];
-            Double elemento = Double.parseDouble(params[2]);
+            String clasificacion = params[1];
+            String elemento = params[2];
 
             String link = "http://atreveteacrecer.metrocasas.com.gt/insertElement.php";
             String data = URLEncoder.encode("proyecto", "UTF-8") + "=" + URLEncoder.encode(proyecto, "UTF-8")
-                    + "&" + URLEncoder.encode("clasficiacion", "UTF-8") + "=" + URLEncoder.encode(clasficiacion, "UTF-8")
-                    + "&" + URLEncoder.encode("elemento", "UTF-8") + "=" + URLEncoder.encode(elemento.toString(), "UTF-8");
+                    + "&" + URLEncoder.encode("clasificacion", "UTF-8") + "=" + URLEncoder.encode(clasificacion, "UTF-8")
+                    + "&" + URLEncoder.encode("elemento", "UTF-8") + "=" + URLEncoder.encode(elemento, "UTF-8");
 
             URL url = new URL(link);
             URLConnection conn = url.openConnection();
@@ -64,7 +67,7 @@ public class IngresoElemento extends AsyncTask<String, Integer, String> {
 
     @Override
     protected void onPostExecute(String result) {
-
+        Toast.makeText(this.context, result, Toast.LENGTH_LONG).show();
     }
 
 }

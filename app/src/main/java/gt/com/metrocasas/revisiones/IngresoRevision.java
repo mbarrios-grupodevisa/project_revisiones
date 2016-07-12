@@ -20,11 +20,9 @@ public class IngresoRevision extends AsyncTask<String, Integer, String> {
     View v;
     Context context;
     String revisionid;
-    List<Elemento> listElemento;
 
-    public IngresoRevision(Context context, List<Elemento> listElemento, View v) {
+    public IngresoRevision(Context context, View v) {
         this.context = context;
-        this.listElemento = listElemento;
         this.v = v;
     }
 
@@ -35,6 +33,7 @@ public class IngresoRevision extends AsyncTask<String, Integer, String> {
             String user = params[0];
             String proyecto = params[1];
             String fechaRevision = params[2];
+            String json = params[3];
 
             String link = "http://atreveteacrecer.metrocasas.com.gt/insertRevision.php";
             String data = URLEncoder.encode("user_id", "UTF-8") + "=" + URLEncoder.encode(user, "UTF-8")
@@ -59,13 +58,10 @@ public class IngresoRevision extends AsyncTask<String, Integer, String> {
             JSONObject jsonObject = new JSONObject(sb.toString());
             JSONArray jsonArray = jsonObject.getJSONArray("revisiones");
             revisionid  = jsonArray.getJSONObject(0).getString("id");
-            for (Elemento i:listElemento) {
+
                 link = "http://atreveteacrecer.metrocasas.com.gt/insertDetalleRevision.php";
                 data = URLEncoder.encode("revision_id", "UTF-8") + "=" + URLEncoder.encode(revisionid, "UTF-8")
-                        + "&" + URLEncoder.encode("elemento_id", "UTF-8") + "=" + URLEncoder.encode(i.getId(), "UTF-8")
-                        + "&" + URLEncoder.encode("estado", "UTF-8") + "=" + URLEncoder.encode(Integer.toString(i.isEstado()), "UTF-8")
-                        + "&" + URLEncoder.encode("imagen", "UTF-8") + "=" + URLEncoder.encode(i.getImagen(), "UTF-8")
-                        + "&" + URLEncoder.encode("comentario", "UTF-8") + "=" + URLEncoder.encode(i.getComentario(), "UTF-8") ;
+                        + "&" + URLEncoder.encode("json", "UTF-8") + "=" + URLEncoder.encode(json, "UTF-8");
 
                 url = new URL(link);
                 conn = url.openConnection();
@@ -81,9 +77,8 @@ public class IngresoRevision extends AsyncTask<String, Integer, String> {
                 {
                     sb.append(line);
                 }
-            }
-            listElemento.clear();
-            return sb.toString();
+
+            return "success";
         }
         catch(Exception e)  {
             return e.toString();

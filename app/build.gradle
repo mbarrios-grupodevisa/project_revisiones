@@ -29,6 +29,6 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:24.0.+'
     compile 'com.google.android.gms:play-services-appindexing:8.1.0'
     compile 'com.amazonaws:aws-android-sdk-core:2.2.20'
+    compile 'com.amazonaws:aws-android-sdk-s3:2.2.20'
     compile 'org.projectlombok:lombok:1.12.6'
-    releaseCompile 'com.amazonaws:aws-android-sdk-s3:2.2.20'
 }
