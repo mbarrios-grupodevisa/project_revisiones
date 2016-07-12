@@ -28,7 +28,7 @@
                 android:paddingBottom="5dp"
                 android:background="@color/colorPrimaryDark"
                 android:textColor="#FFFFFF"
-                android:drawableRight="@drawable/arrow_up"
+                android:drawableEnd="@drawable/arrow_up"
                 android:paddingRight="10dp"
                 android:paddingLeft="10dp"
                 android:text="@string/limpieza"

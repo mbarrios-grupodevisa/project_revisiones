@@ -20,6 +20,13 @@
     <string name="construccion">CONSTRUCCIÓN</string>
     <string name="despensa">DESPENSA</string>
     <string name="limpieza">LIMPIEZA</string>
+    <string name="foto_comentario">Foto | Comentario</string>
+    <string name="comentarios">Comentarios</string>
+    <string name="enviar_datos">Enviar Datos</string>
+    <string name="revision">Revisión</string>
+    <string name="modelo">Modelo</string>
+    <string name="agregar_comentario">+</string>
+    <string name="titulo_revision">Fecha</string>
 
     <string-array name="lista_proyectos">
         <item>Viventi</item>

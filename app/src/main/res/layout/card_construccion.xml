@@ -30,7 +30,7 @@
                 android:textColor="#FFFFFF"
                 android:text="@string/construccion"
                 android:id="@+id/text_view_title_construccion"
-                android:drawableRight="@drawable/arrow_up"
+                android:drawableEnd="@drawable/arrow_up"
                 android:paddingRight="10dp"
                 android:paddingLeft="10dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"

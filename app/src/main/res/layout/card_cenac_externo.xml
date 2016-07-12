@@ -29,7 +29,7 @@
                 android:background="@color/colorPrimaryDark"
                 android:textColor="#FFFFFF"
                 android:text="@string/cenac_externo"
-                android:drawableRight="@drawable/arrow_up"
+                android:drawableEnd="@drawable/arrow_up"
                 android:paddingRight="10dp"
                 android:paddingLeft="10dp"
                 android:id="@+id/text_view_title_cenac_externo"
