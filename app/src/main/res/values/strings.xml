@@ -13,4 +13,18 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="btn_aceptar">Aceptar</string>
     <string name="btn_cancelar">Cancelar</string>
+
+    <string-array name="lista_proyectos">
+        <item>Viventi</item>
+        <item>Casa Asunción</item>
+    </string-array>
+    <string-array name="lista_clasificacion">
+        <item>Cenac Interno</item>
+        <item>Cenac Externo</item>
+        <item>Despensa</item>
+        <item>Limpieza</item>
+        <item>Construcción</item>
+    </string-array>
+
+
 </resources>

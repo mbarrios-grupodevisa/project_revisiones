@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            new NuevoItemRevisionDialog().show(this.getFragmentManager(),"");
             return true;
         }
 

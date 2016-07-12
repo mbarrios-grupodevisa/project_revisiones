@@ -4,7 +4,7 @@ package gt.com.metrocasas.revisiones;
  * Created by Usuario on 05/07/2016.
  */
 public class ItemRevision {
-    String date = "DOS";
+    String date = "";
 
     public ItemRevision(){
     }
