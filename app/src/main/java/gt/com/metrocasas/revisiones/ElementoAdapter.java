@@ -49,8 +49,6 @@ public class ElementoAdapter extends RecyclerView.Adapter<ElementoAdapter.MyView
             agregar_comentario = (Button) view.findViewById(R.id.element_btn);
             this.e  = it;
 
-
-
             estado.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
@@ -78,14 +76,11 @@ public class ElementoAdapter extends RecyclerView.Adapter<ElementoAdapter.MyView
         }
     }
 
-
-
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_elemento, parent, false);
         Elemento item = listElemento.get(tam);
         tam++;
-        Log.i("Tam:",tam+"");
         return new MyViewHolder(itemView,item);
     }
 
@@ -133,9 +128,5 @@ public class ElementoAdapter extends RecyclerView.Adapter<ElementoAdapter.MyView
         CardView card_view = (CardView) actividad.findViewById(R.id.card_view_construccion);
         card_view.setVisibility(View.GONE);
     }
-
-
-
-
 
 }

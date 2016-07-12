@@ -64,6 +64,7 @@ public class DetalleRevisionActivity extends AppCompatActivity implements View.O
         proyecto = getIntent().getExtras().getString("proyecto");
         user = getIntent().getExtras().getString("id");
         fechaRevision = new SimpleDateFormat("dd-MMMM-yyyy HH:mm:ss").format(new Date());
+        this.setTitle(proyecto);
 
         recyclerViewCenacInterno = (RecyclerView) findViewById(R.id.recycler_view_ci);
         recyclerViewCenacExterno = (RecyclerView) findViewById(R.id.recycler_view_ce);
