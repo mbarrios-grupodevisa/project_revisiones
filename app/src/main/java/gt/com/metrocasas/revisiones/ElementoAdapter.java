@@ -61,7 +61,7 @@ public class ElementoAdapter extends RecyclerView.Adapter<ElementoAdapter.MyView
             agregar_comentario.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ComentarioDialog comentario = new ComentarioDialog();
+                    comentarioDialog comentario = new comentarioDialog();
                     comentario.setElement(e);
                     comentario.setBtn_coment(agregar_comentario);
                     comentario.show(actividad.getFragmentManager(),"");

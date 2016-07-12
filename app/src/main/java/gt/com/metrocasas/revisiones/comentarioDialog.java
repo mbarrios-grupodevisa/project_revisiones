@@ -21,7 +21,7 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class ComentarioDialog extends DialogFragment {
+public class comentarioDialog extends DialogFragment {
 
     private EditText comentario;
     private ImageView imagen;
@@ -67,14 +67,14 @@ public class ComentarioDialog extends DialogFragment {
                                 btn_coment.setBackgroundColor(Color.parseColor("#4caf50"));
                                 btn_coment.setTextColor(Color.WHITE);
                             }else{
-                                ComentarioDialog.this.getDialog().dismiss();
+                                comentarioDialog.this.getDialog().dismiss();
                             }
 
                     }
                 })
                 .setNegativeButton(R.string.btn_cancelar, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        ComentarioDialog.this.getDialog().cancel();
+                        comentarioDialog.this.getDialog().cancel();
                     }
                 });
 
