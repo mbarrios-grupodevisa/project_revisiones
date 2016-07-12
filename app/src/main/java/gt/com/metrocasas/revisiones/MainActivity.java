@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.casa_asuncion) {
             Fragment fragment = new FragmentRevisionesList();
             Bundle args = new Bundle();
-            args.putString("proyecto", "Casa Asuncion");
+            args.putString("proyecto", "Casa Asunción");
             args.putString("id", userid);
             fragment.setArguments(args);
             FragmentManager fragmentManager = getFragmentManager();
