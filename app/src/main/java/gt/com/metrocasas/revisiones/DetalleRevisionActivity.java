@@ -296,12 +296,4 @@ public class DetalleRevisionActivity extends AppCompatActivity implements View.O
             return "null";
         }
     }
-
-    public void finalizar() {
-        Intent databack = new Intent();
-        databack.putExtra("fecha",fechaRevision);
-        if(proyecto.equals("Viventi")) setResult(VIVENTI,databack);
-        if(proyecto.equals("Casa Asuncion")) setResult(CASA_ASUNCION,databack);
-        this.finish();
-    }
 }

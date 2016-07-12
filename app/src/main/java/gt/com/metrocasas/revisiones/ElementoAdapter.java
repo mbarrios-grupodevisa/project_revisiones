@@ -14,10 +14,6 @@ import android.widget.TextView;
 
 import java.util.List;
 
-
-/**
- * Created by Usuario on 07/07/2016.
- */
 public class ElementoAdapter extends RecyclerView.Adapter<ElementoAdapter.MyViewHolder> {
 
     private List<Elemento> listElemento;

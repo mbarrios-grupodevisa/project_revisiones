@@ -1,16 +1,12 @@
 package gt.com.metrocasas.revisiones;
 
-import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.AsyncTask;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.io.BufferedReader;

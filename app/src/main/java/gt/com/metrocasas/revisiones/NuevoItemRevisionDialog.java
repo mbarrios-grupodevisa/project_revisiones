@@ -11,9 +11,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-/**
- * Created by Usuario on 12/07/2016.
- */
 public class NuevoItemRevisionDialog extends DialogFragment{
 
     private Spinner lista_proyectos;
@@ -25,21 +22,10 @@ public class NuevoItemRevisionDialog extends DialogFragment{
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         // Get the layout inflater
         LayoutInflater inflater = getActivity().getLayoutInflater();
-
-               // Inflate and set the layout for the dialog
-        // Pass null as the parent view because its going in the dialog layout
         final View v = inflater.inflate(R.layout.dialog_ingresar_item_revision, null);
-
         lista_proyectos = (Spinner) v.findViewById(R.id.proyecto);
         lista_clasificacion = (Spinner) v.findViewById(R.id.clasificacion);
         revision = (EditText) v.findViewById(R.id.editText_revision);
-
-        //String p = getArguments().getString("proyecto");
-        //if(p != null)
-        //{
-        //    if(p.equals("Viventi")) lista_clasificacion.setSelection(0);
-        //    if(p.equals("Casa Asunción")) lista_clasificacion.setSelection(1);
-        //}
 
         builder.setView(v)
                 // Add action buttons
