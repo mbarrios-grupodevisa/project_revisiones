@@ -28,6 +28,7 @@
             android:layout_height="wrap_content"
             android:text="@string/obteniendoelementos"
             android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
             android:id="@+id/tvUpload2"
             android:textColor="#000000"/>
 

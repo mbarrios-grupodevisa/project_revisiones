@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferListener;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
@@ -209,6 +208,7 @@ public class DetalleRevisionActivity extends AppCompatActivity {
                 dialog.dismiss();
                 p.setVisibility(View.VISIBLE);
                 q.setVisibility(View.GONE);
+                info.setText(R.string.subiendofotos);
                 progreso.setProgress(0);
                 upLoadPictures();
             }
@@ -255,7 +255,7 @@ public class DetalleRevisionActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(int id, Exception ex) {
-                        Toast.makeText(DetalleRevisionActivity.this, ex.toString(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(DetalleRevisionActivity.this, ex.toString(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }
