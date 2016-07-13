@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity
 
     private GoogleApiClient client;
     private Toolbar toolbar;
-    public String userid;
+    public String userid, proyecto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Viventi");
+        proyecto = "Viventi";
         setSupportActionBar(toolbar);
         userid = getIntent().getExtras().getString("id");
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -84,7 +85,11 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            new NuevoItemRevisionDialog().show(this.getFragmentManager(),"");
+            NuevoItemRevisionDialog nird = new NuevoItemRevisionDialog();
+            Bundle bundle = new Bundle();
+            bundle.putString("proyecto", proyecto);
+            nird.setArguments(bundle);
+            nird.show(this.getFragmentManager(),"");
             return true;
         }
 
@@ -98,6 +103,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.viventi) {
+            proyecto = "Viventi";
             Fragment fragment = new FragmentRevisionesList();
             Bundle args = new Bundle();
             args.putString("proyecto", "Viventi");
@@ -109,6 +115,7 @@ public class MainActivity extends AppCompatActivity
                     .commit();
             toolbar.setTitle("Viventi");
         } else if (id == R.id.casa_asuncion) {
+            proyecto = "Casa Asunción";
             Fragment fragment = new FragmentRevisionesList();
             Bundle args = new Bundle();
             args.putString("proyecto", "Casa Asunción");

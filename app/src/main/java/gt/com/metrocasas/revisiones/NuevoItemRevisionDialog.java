@@ -26,7 +26,10 @@ public class NuevoItemRevisionDialog extends DialogFragment{
         lista_proyectos = (Spinner) v.findViewById(R.id.proyecto);
         lista_clasificacion = (Spinner) v.findViewById(R.id.clasificacion);
         revision = (EditText) v.findViewById(R.id.editText_revision);
-
+        String proyecto = getArguments().getString("proyecto");
+        assert proyecto != null;
+        if(proyecto.equals("Viventi")) lista_proyectos.setSelection(0);
+        if(proyecto.equals("Casa Asunción")) lista_proyectos.setSelection(1);
         builder.setView(v)
                 // Add action buttons
                 .setPositiveButton(R.string.btn_aceptar, new DialogInterface.OnClickListener() {
