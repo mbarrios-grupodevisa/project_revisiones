@@ -1,7 +1,9 @@
 package gt.com.metrocasas.revisiones;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,7 +14,6 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferListener;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
@@ -20,17 +21,15 @@ import com.amazonaws.mobileconnectors.s3.transferutility.TransferState;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class DetalleRevisionActivity extends AppCompatActivity implements View.OnClickListener{
+public class DetalleRevisionActivity extends AppCompatActivity {
 
     private List<Elemento> listItemCE = new ArrayList<>();
     private RecyclerView recyclerViewCenacExterno;
@@ -88,10 +87,7 @@ public class DetalleRevisionActivity extends AppCompatActivity implements View.O
         enviar_datos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                p.setVisibility(View.VISIBLE);
-                q.setVisibility(View.GONE);
-                progreso.setProgress(0);
-                upLoadPictures();
+                subirInformacion();
             }
         });
 
@@ -203,9 +199,27 @@ public class DetalleRevisionActivity extends AppCompatActivity implements View.O
         new GetElementos(this, aAdapterCI, aAdapterCE, aAdapterDespensa, aAdapterLimpieza, aAdapterConstruccion, p, q, progreso).execute(proyecto);
     }
 
-    @Override
-    public void onClick(View view) {
-
+    public void subirInformacion() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Confirmación de envío");
+        builder.setMessage("Confirmo que deseo enviar y cerrar esta revisión.");
+        builder.setIcon(android.R.drawable.ic_menu_info_details);
+        builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.dismiss();
+                p.setVisibility(View.VISIBLE);
+                q.setVisibility(View.GONE);
+                progreso.setProgress(0);
+                upLoadPictures();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
     private boolean bandera = true;
