@@ -56,8 +56,8 @@ public class DetalleRevisionActivity extends AppCompatActivity {
     private static final int VIVENTI = 3;
     private static final int CASA_ASUNCION = 4;
 
-    public final static String MY_ACCESS_KEY_ID = "";
-    public final static String MY_SECRET_KEY = "";
+    public final static String MY_ACCESS_KEY_ID = "AKIAJB5BY3WGHYOAO3VQ";
+    public final static String MY_SECRET_KEY = "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";
     public final static String BUCKET_NAME = "projectsgtimages";
 
     @Override
@@ -73,7 +73,7 @@ public class DetalleRevisionActivity extends AppCompatActivity {
         v = findViewById(R.id.detalle);
         proyecto = getIntent().getExtras().getString("proyecto");
         user = getIntent().getExtras().getString("id");
-        fechaRevision = new SimpleDateFormat("dd.MM.yy hh:mm a").format(new Date());
+        fechaRevision = new SimpleDateFormat("dd.MM.yy hh:mm").format(new Date());
         this.setTitle(proyecto);
 
         recyclerViewCenacInterno = (RecyclerView) findViewById(R.id.recycler_view_ci);
