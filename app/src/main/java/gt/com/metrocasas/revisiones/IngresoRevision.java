@@ -53,11 +53,9 @@ public class IngresoRevision extends AsyncTask<String, Integer, String> {
             URL url = new URL(link);
             URLConnection conn = url.openConnection();
             conn.setDoOutput(true);
-
             OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
             wr.write(data);
             wr.flush();
-
             BufferedReader reader = new BufferedReader(new InputStreamReader((conn.getInputStream())));
             StringBuilder sb = new StringBuilder();
             String line;
