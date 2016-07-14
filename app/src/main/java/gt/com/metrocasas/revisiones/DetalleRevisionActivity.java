@@ -14,10 +14,12 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.auth.CognitoCachingCredentialsProvider;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferListener;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferState;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
+import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import org.json.JSONArray;
@@ -56,8 +58,6 @@ public class DetalleRevisionActivity extends AppCompatActivity {
     private static final int VIVENTI = 3;
     private static final int CASA_ASUNCION = 4;
 
-    public final static String MY_ACCESS_KEY_ID = "";
-    public final static String MY_SECRET_KEY = "";
     public final static String BUCKET_NAME = "projectsgtimages";
 
     @Override
@@ -222,6 +222,15 @@ public class DetalleRevisionActivity extends AppCompatActivity {
         alert.show();
     }
 
+    public CognitoCachingCredentialsProvider amazonCognito() {
+        CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
+                getApplicationContext(),
+                "us-east-1:66fdcec3-f2c0-4015-80ef-f9efcad31fb3", // Identity Pool ID
+                Regions.US_EAST_1 // Region
+        );
+        return credentialsProvider;
+    }
+
     private boolean bandera = true;
     public void upLoadPictures() {
         bandera = true;
@@ -233,7 +242,7 @@ public class DetalleRevisionActivity extends AppCompatActivity {
         }
         if (!files.isEmpty()) {
             for (File i : files) {
-                AmazonS3 s3Client = new AmazonS3Client(new BasicAWSCredentials(MY_ACCESS_KEY_ID, MY_SECRET_KEY));
+                AmazonS3 s3Client = new AmazonS3Client(amazonCognito());
                 TransferUtility transferUtility = new TransferUtility(s3Client, this);
                 TransferObserver transferObserver = transferUtility.upload(BUCKET_NAME, "revisionesmerca/" + i.getName(), i);
                 transferObserver.setTransferListener(new TransferListener() {
