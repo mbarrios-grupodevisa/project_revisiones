@@ -73,7 +73,7 @@ public class DetalleRevisionActivity extends AppCompatActivity {
         v = findViewById(R.id.detalle);
         proyecto = getIntent().getExtras().getString("proyecto");
         user = getIntent().getExtras().getString("id");
-        fechaRevision = new SimpleDateFormat("dd-MMMM-yyyy HH:mm:ss").format(new Date());
+        fechaRevision = new SimpleDateFormat("dd.MM.yy hh:mm a").format(new Date());
         this.setTitle(proyecto);
 
         recyclerViewCenacInterno = (RecyclerView) findViewById(R.id.recycler_view_ci);
