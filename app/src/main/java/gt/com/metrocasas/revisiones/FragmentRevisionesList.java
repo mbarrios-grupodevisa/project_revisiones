@@ -91,7 +91,7 @@ public class FragmentRevisionesList extends Fragment {
                 progreso.setProgress(0);
                 new GetRevisiones(getActivity(), rAdapter, listRevision, swipeContainer, p, q, progreso).execute(proyecto, userid);
                 Snackbar.make(q, "Datos Cargados Correctamente", Snackbar.LENGTH_INDEFINITE)
-                        .setActionTextColor(getResources().getColor(R.color.colorPrimary))
+                        .setActionTextColor(getResources().getColor(R.color.colorAccent))
                         .setAction("ACEPTAR", new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -108,7 +108,7 @@ public class FragmentRevisionesList extends Fragment {
                 progreso.setProgress(0);
                 new GetRevisiones(getActivity(), rAdapter, listRevision, swipeContainer, p, q, progreso).execute(proyecto, userid);
                 Snackbar.make(q, "Datos Cargados Correctamente", Snackbar.LENGTH_INDEFINITE)
-                        .setActionTextColor(getResources().getColor(R.color.colorPrimary))
+                        .setActionTextColor(getResources().getColor(R.color.colorAccent))
                         .setAction("ACEPTAR", new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {

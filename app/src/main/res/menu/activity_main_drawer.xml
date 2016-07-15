@@ -4,10 +4,12 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/viventi"
-            android:title="Viventi" />
+            android:title="Viventi"
+            android:icon="@drawable/viventi"/>
         <item
             android:id="@+id/casa_asuncion"
-            android:title="Casa Asunción" />
+            android:title="Casa Asunción"
+            android:icon="@drawable/casa"/>
     </group>
 
 </menu>
