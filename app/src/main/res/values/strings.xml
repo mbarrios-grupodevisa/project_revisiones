@@ -31,6 +31,7 @@
     <string name="proyecto">Revisión de Proyectos</string>
     <string name="mail">metrocasas.com.gt</string>
     <string name="nuevoelementorevision">Nuevo Elemento de Revisión</string>
+    <string name="logout">Cerrar Sesión</string>
 
     <string-array name="lista_proyectos">
         <item>Viventi</item>

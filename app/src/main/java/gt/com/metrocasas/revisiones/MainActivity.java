@@ -3,9 +3,11 @@ package gt.com.metrocasas.revisiones;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -44,29 +46,21 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
         setFragment(1);
+        hello();
+    }
+
+    private void hello() {
+        SharedPreferences settings = getApplicationContext().getSharedPreferences("User",0);
+        String firstName = settings.getString("firstname",null);
+        String lastName = settings.getString("lastname",null);
+        Snackbar.make(toolbar,"Bienvenido(a) " + firstName + " "+lastName, Snackbar.LENGTH_LONG).show();
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            new AlertDialog.Builder(this)
-                    .setIcon(android.R.drawable.ic_lock_lock)
-                    .setTitle("Cerrar Sesión")
-                    .setMessage("¿Está seguro que desea cerrar su sesión y salir?")
-                    .setPositiveButton("Si", new DialogInterface.OnClickListener()
-                    {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            finish();
-                        }
-
-                    })
-                    .setNegativeButton("No", null)
-                    .show();
-        }
+        moveTaskToBack(true);
+        android.os.Process.killProcess(android.os.Process.myPid());
+        System.exit(1);
     }
 
     @Override
@@ -126,6 +120,29 @@ public class MainActivity extends AppCompatActivity
                     .replace(R.id.content_frame, fragment)
                     .commit();
             toolbar.setTitle("Casa Asunción");
+        }else if (id == R.id.logout)
+        {
+            new AlertDialog.Builder(this)
+                    .setIcon(android.R.drawable.ic_lock_lock)
+                    .setTitle("Cerrar Sesión")
+                    .setMessage("¿Está seguro que desea cerrar su sesión y salir?")
+                    .setPositiveButton("Si", new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            SharedPreferences settings = getApplicationContext().getSharedPreferences("User",0);
+                            SharedPreferences.Editor editor = settings.edit();
+                            editor.putString("id",null);
+                            editor.putString("firstname",null);
+                            editor.apply();
+
+                            finish();
+
+                        }
+
+                    })
+                    .setNegativeButton("No", null)
+                    .show();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
