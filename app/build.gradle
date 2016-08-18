@@ -5,7 +5,7 @@ android {
     buildToolsVersion "24.0.0"
 
     defaultConfig {
-        applicationId "gt.com.metrocasas.revisiones"
+        applicationId "gt.com.metrocasas.opencheck"
         minSdkVersion 19
         targetSdkVersion 24
         versionCode 3

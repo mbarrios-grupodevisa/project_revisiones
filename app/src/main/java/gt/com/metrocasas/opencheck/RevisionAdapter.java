@@ -1,4 +1,4 @@
-package gt.com.metrocasas.revisiones;
+package gt.com.metrocasas.opencheck;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

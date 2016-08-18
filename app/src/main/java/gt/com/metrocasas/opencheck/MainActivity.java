@@ -1,4 +1,4 @@
-package gt.com.metrocasas.revisiones;
+package gt.com.metrocasas.opencheck;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -165,7 +165,7 @@ public class MainActivity extends AppCompatActivity
                 // Otherwise, set the URL to null.
                 Uri.parse("http://host/path"),
                 // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse("android-app://gt.com.metrocasas.revisiones/http/host/path")
+                Uri.parse("android-app://gt.com.metrocasas.opencheck/http/host/path")
         );
         AppIndex.AppIndexApi.start(client, viewAction);
     }
@@ -184,7 +184,7 @@ public class MainActivity extends AppCompatActivity
                 // Otherwise, set the URL to null.
                 Uri.parse("http://host/path"),
                 // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse("android-app://gt.com.metrocasas.revisiones/http/host/path")
+                Uri.parse("android-app://gt.com.metrocasas.opencheck/http/host/path")
         );
         AppIndex.AppIndexApi.end(client, viewAction);
         client.disconnect();

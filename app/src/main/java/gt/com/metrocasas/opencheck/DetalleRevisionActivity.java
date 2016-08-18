@@ -1,4 +1,4 @@
-package gt.com.metrocasas.revisiones;
+package gt.com.metrocasas.opencheck;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import com.amazonaws.auth.BasicAWSCredentials;
+
 import com.amazonaws.auth.CognitoCachingCredentialsProvider;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferListener;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="gt.com.metrocasas.revisiones">
+    package="gt.com.metrocasas.opencheck">
 
     <uses-permission android:name="android.permission.READ_LOGS" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -20,13 +20,13 @@
             android:enabled="true" />
 
         <activity
-            android:name=".MainActivity"
+            android:name="gt.com.metrocasas.opencheck.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"
             android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
 
-        <activity android:name=".LoginActivity"
+        <activity android:name="gt.com.metrocasas.opencheck.LoginActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
@@ -38,7 +38,7 @@
         </activity>
 
         <activity
-            android:name=".DetalleRevisionActivity"
+            android:name="gt.com.metrocasas.opencheck.DetalleRevisionActivity"
             android:theme="@style/AppTheme"
             android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>

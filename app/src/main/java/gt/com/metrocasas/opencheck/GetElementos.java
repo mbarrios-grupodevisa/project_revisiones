@@ -1,4 +1,4 @@
-package gt.com.metrocasas.revisiones;
+package gt.com.metrocasas.opencheck;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -131,19 +131,19 @@ public class GetElementos extends AsyncTask<String, Integer, String> {
 
         if(listInternos.isEmpty())
         {
-            cAdapter.hidenCardViewCenacInterno();
+            iAdapter.hidenCardViewCenacInterno();
         }
         if(listExternos.isEmpty())
         {
-            cAdapter.hidenCardViewCenacExterno();
+            eAdapter.hidenCardViewCenacExterno();
         }
         if(listLimpieza.isEmpty())
         {
-            cAdapter.hidenCardViewLimpieza();
+            lAdapter.hidenCardViewLimpieza();
         }
         if(listDespensa.isEmpty())
         {
-            cAdapter.hidenCardViewDespensa();
+            dAdapter.hidenCardViewDespensa();
         }
         if(listConstruccion.isEmpty())
         {

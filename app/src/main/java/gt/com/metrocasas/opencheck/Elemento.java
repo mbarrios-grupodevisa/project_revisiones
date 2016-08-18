@@ -1,4 +1,4 @@
-package gt.com.metrocasas.revisiones;
+package gt.com.metrocasas.opencheck;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;

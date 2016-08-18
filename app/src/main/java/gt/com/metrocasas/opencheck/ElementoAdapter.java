@@ -1,4 +1,4 @@
-package gt.com.metrocasas.revisiones;
+package gt.com.metrocasas.opencheck;
 
 import android.app.Activity;
 import android.graphics.Paint;
@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -61,6 +62,29 @@ public class ElementoAdapter extends RecyclerView.Adapter<ElementoAdapter.MyView
                     comentario.setElement(e);
                     comentario.setBtn_coment(agregar_comentario);
                     comentario.show(actividad.getFragmentManager(),"");
+                }
+            });
+
+            elemento.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    if(e.isEstado()== 0)
+                    {
+                        agregar_comentario.setEnabled(false);
+                        e.setComentario("Sin existencias");
+                        Toast.makeText(view.getContext(),"Sin existencia",Toast.LENGTH_LONG).show();
+                        agregar_comentario.setEnabled(false);
+                        e.setEstado(true);
+                    }
+                    else
+                    {
+                        agregar_comentario.setEnabled(true);
+                        e.setComentario("");
+                        agregar_comentario.setEnabled(true);
+                        e.setEstado(false);
+                    }
+
+                    return true;
                 }
             });
         }
