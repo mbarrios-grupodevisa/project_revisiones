@@ -1,7 +1,10 @@
 package gt.com.metrocasas.opencheck;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -86,7 +89,11 @@ public class DetalleRevisionActivity extends AppCompatActivity {
         enviar_datos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                subirInformacion();
+                if(isNetworkAvailable()) {
+                    subirInformacion();
+                } else {
+
+                }
             }
         });
 
@@ -196,6 +203,12 @@ public class DetalleRevisionActivity extends AppCompatActivity {
         //</editor-fold>
 
         new GetElementos(this, aAdapterCI, aAdapterCE, aAdapterDespensa, aAdapterLimpieza, aAdapterConstruccion, p, q, progreso).execute(proyecto);
+    }
+
+    public boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager)this.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
+        return activeNetwork.isConnectedOrConnecting();
     }
 
     public void subirInformacion() {

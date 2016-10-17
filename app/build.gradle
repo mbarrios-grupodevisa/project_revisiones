@@ -2,14 +2,14 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "24.0.0"
+    buildToolsVersion "24.0.1"
 
     defaultConfig {
         applicationId "gt.com.metrocasas.opencheck"
         minSdkVersion 19
         targetSdkVersion 24
-        versionCode 3
-        versionName "1.1"
+        versionCode 4
+        versionName "1.1.1"
     }
     buildTypes {
         release {

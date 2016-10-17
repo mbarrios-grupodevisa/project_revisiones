@@ -43,7 +43,7 @@ public class GetRevisiones extends AsyncTask<String, Integer, String> {
 
             String proyecto = params[0];
             String userid = params[1];
-            String link = "http://atreveteacrecer.metrocasas.com.gt/readRevisiones.php";
+            String link = "http://monkeepower.com/appsinternas/revisionescenac/readRevisiones.php";
             String data = URLEncoder.encode("proyecto", "UTF-8") + "=" + URLEncoder.encode(proyecto, "UTF-8")
                     + "&" + URLEncoder.encode("id", "UTF-8") + "=" + URLEncoder.encode(userid, "UTF-8");
 
